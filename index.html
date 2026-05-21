@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Case Study Editor – AquaPhoenix Scientific</title>
+<title>Case Study Editor – TankScan</title>
 <!-- mammoth.js: converts .docx → plain text in the browser, no server needed -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 <!-- pdf.js: extracts text from PDFs client-side, no server or worker needed -->
@@ -176,8 +176,8 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
 
 /* ═══ BULLET LISTS ════════════════════════════════════════════════════════ */
 .blist{} .brow{display:flex;align-items:flex-start;gap:4px;margin:2px 0;}
-.bsym{color:#3D3D3D;font-size:10px;flex-shrink:0;margin-top:2px;line-height:15px;}
-.btxt{font-size:10px;color:#3D3D3D;line-height:15px;flex:1;min-width:20px;}
+.bsym{color:#3D3D3D;font-size:12px;flex-shrink:0;margin-top:2px;line-height:18px;}
+.btxt{font-size:12px;color:#3D3D3D;line-height:18px;flex:1;min-width:20px;}
 .bdel{opacity:1;background:none;border:none;color:#ef4444;cursor:pointer;
   font-size:10px;padding:0 4px;flex-shrink:0;line-height:15px;
   font-family:inherit;position:relative;z-index:510;pointer-events:all;}
@@ -213,7 +213,7 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
 #logo-slot{position:absolute;top:115px;left:38px;width:180px;height:60px;}
 #logo-slot img{object-fit:contain;object-position:left center;}
 .p1-desc{position:absolute;top:195px;left:38px;width:245px;
-  font-size:10px;color:#3D3D3D;line-height:15px;}
+  font-size:12px;color:#3D3D3D;line-height:18px;}
 /* Application/Market — stacked label+value pairs; value indented under label */
 /* Application/Market labels follow the diagonal cut angle.
    Diagonal: x = 386 + (y-50)*0.6  — each row shifts right as it goes down. */
@@ -236,11 +236,11 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
   border:0.5px solid #CCCCCC;border-radius:8px;
   clip-path:polygon(0 0,calc(100% - 18px) 0,100% 34px,100% 100%,0 100%);
   padding:14px 14px 10px;min-height:200px;z-index:5;}
-.box-hd{font-size:11px;font-weight:bold;color:#222222;margin-bottom:6px;}
-.p1-ch-body{font-size:10px;color:#3D3D3D;line-height:15px;margin-bottom:4px;}
-.p1-ch-intro{font-size:10px;color:#3D3D3D;line-height:15px;margin-bottom:3px;}
-.p1-ch-quote{font-size:13px;color:#3A9DD1;font-style:italic;
-  line-height:19px;margin-top:8px;}
+.box-hd{font-size:14px;font-weight:bold;color:#222222;margin-bottom:6px;}
+.p1-ch-body{font-size:12px;color:#3D3D3D;line-height:18px;margin-bottom:4px;}
+.p1-ch-intro{font-size:12px;color:#3D3D3D;line-height:18px;margin-bottom:3px;}
+.p1-ch-quote{font-size:14px;color:#3A9DD1;font-style:italic;
+  line-height:21px;margin-top:8px;}
 .p1-footer{position:absolute;bottom:0;left:0;width:233px;height:47px;
   background:#3A9DD1;clip-path:polygon(0 0,89.3% 0,100% 100%,0 100%);
   display:flex;align-items:center;padding-left:16px;overflow:hidden;z-index:10;}
@@ -252,25 +252,26 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
   border:0.5px solid #CCCCCC;border-radius:8px;
   clip-path:polygon(0 0,calc(100% - 18px) 0,100% 34px,100% 100%,0 100%);
   padding:14px;min-height:260px;overflow:auto;}
-/* clearfix: sol-box expands to contain the floated trifecta image */
-.p2-sol::after{content:'';display:table;clear:both;}
-.p2-sol-p1{font-size:10px;color:#3D3D3D;line-height:15px;margin-bottom:8px;}
+.p2-sol-p1{font-size:12px;color:#3D3D3D;line-height:18px;margin-bottom:8px;}
 /* sol-p2: identical style to sol-p1; hidden via CSS when empty so no grey ghost appears */
-.p2-sol-p2{font-size:10px;color:#3D3D3D;line-height:15px;margin-bottom:8px;}
+.p2-sol-p2{font-size:12px;color:#3D3D3D;line-height:18px;margin-bottom:8px;}
 .p2-sol-p2:empty{display:none;}
-/* trifecta-slot: floated inside sol-box so text wraps naturally around it.
-   On first drag the editor converts it to position:absolute so it can move freely. */
+.p2-sol-p3{font-size:12px;color:#3D3D3D;line-height:18px;margin-bottom:8px;}
+.p2-sol-p3:empty{display:none;}
+.p2-sol-p3.is-quote{font-size:14px;color:#3A9DD1;font-style:italic;line-height:21px;margin-top:8px;margin-bottom:0;}
+/* trifecta-slot: floated right after sol-p2 so text above fills full width,
+   and sol-p3 (quote) wraps to its left. Dragging converts to position:absolute. */
+.p2-sol::after{content:'';display:table;clear:both;}
 #trifecta-slot{float:right;position:relative;width:215px;height:140px;
   margin:0 0 8px 12px;clear:right;}
 #trifecta-slot img{object-fit:contain;width:100%;height:100%;display:block;}
-/* No padding-right hack needed — the float handles wrapping automatically. */
 .p2-res{position:absolute;top:334px;left:26px;right:26px;background:white;
   border:0.5px solid #CCCCCC;border-radius:8px;
   clip-path:polygon(0 0,calc(100% - 18px) 0,100% 34px,100% 100%,0 100%);
   padding:14px;min-height:300px;}
-.p2-res-intro{font-size:10px;color:#3D3D3D;line-height:15px;margin-bottom:4px;}
-.p2-res-quote{font-size:13px;color:#3A9DD1;font-style:italic;
-  line-height:19px;margin-top:10px;}
+.p2-res-intro{font-size:12px;color:#3D3D3D;line-height:18px;margin-bottom:4px;}
+.p2-res-quote{font-size:14px;color:#3A9DD1;font-style:italic;
+  line-height:21px;margin-top:10px;}
 .p2-footer-group{position:absolute;top:686px;left:0;right:0;height:107px;}
 .p2-docnum{position:absolute;top:0;left:36px;font-size:7px;
   font-weight:bold;color:#222222;font-family:Arial,sans-serif;white-space:pre;}
@@ -728,16 +729,16 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
       <svg class="p1-diag" xmlns="http://www.w3.org/2000/svg">
         <line x1="386" y1="50" x2="554" y2="330" stroke="#A8D0E9" stroke-width="1"/>
       </svg>
-      <div class="p1-tl1 draggable-el" id="tl1" contenteditable="true" data-field="CASE_TITLE_L1" data-label="Headline" style="white-space:pre-wrap">Remote Jet Fuel Inventory Monitoring</div>
+      <div class="p1-tl1 draggable-el" id="tl1" contenteditable="true" data-field="CASE_TITLE_L1" data-label="Headline" style="white-space:pre-wrap"></div>
       <div class="img-slot draggable-el" id="logo-slot" data-img="LOGO_IMAGE" data-label="Company logo">
         <img id="logo-img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iNjAiPjxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iNjAiIGZpbGw9IndoaXRlIiByeD0iNCIgc3Ryb2tlPSIjYzhkNGUwIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWRhc2hhcnJheT0iNSw0Ii8+PHRleHQgeD0iOTAiIHk9IjI1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjYjBiZWM4IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9ImJvbGQiPkNvbXBhbnkgTG9nbzwvdGV4dD48dGV4dCB4PSI5MCIgeT0iNDEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNiMGJlYzgiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjkiPkNsaWNrIMK3IGRyb3Agwrcgb3IgcmVwbGFjZSB2aWEgcGFuZWw8L3RleHQ+PC9zdmc+" alt="Logo" style="object-fit:contain;object-position:left center">
         <div class="img-hover"><div class="img-badge">🖱 Double-click to change</div></div>
       </div>
-      <div class="p1-desc draggable-el" id="desc-box" contenteditable="true" data-field="COMPANY_DESC" data-label="Company description">AquaPhoenix Scientific is a fixed-base operator located in Hanover, PA.</div>
+      <div class="p1-desc draggable-el" id="desc-box" contenteditable="true" data-field="COMPANY_DESC" data-label="Company description"></div>
       <div class="draggable-el" id="app-lbl" contenteditable="true" data-field="APP_LABEL" data-label="Application label">Application:</div>
-      <div class="draggable-el" id="app-val" contenteditable="true" data-field="APPLICATION" data-label="Application value">Fuel Inventory Mgmt.</div>
+      <div class="draggable-el" id="app-val" contenteditable="true" data-field="APPLICATION" data-label="Application value"></div>
       <div class="draggable-el" id="mkt-lbl" contenteditable="true" data-field="MKT_LABEL" data-label="Market label">Market:</div>
-      <div class="draggable-el" id="mkt-val" contenteditable="true" data-field="MARKET_VALUE" data-label="Market value">Aviation</div>
+      <div class="draggable-el" id="mkt-val" contenteditable="true" data-field="MARKET_VALUE" data-label="Market value"></div>
       <div class="p1-sep"></div>
       <div class="img-slot draggable-el" id="hero-lower" data-img="P1_BG_IMAGE" data-label="Page 1 background image">
         <img id="hero-lower-img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MTIiIGhlaWdodD0iNDYwIj48cmVjdCB3aWR0aD0iNjEyIiBoZWlnaHQ9IjQ2MCIgZmlsbD0id2hpdGUiIHJ4PSI0IiBzdHJva2U9IiNjOGQ0ZTAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtZGFzaGFycmF5PSI1LDQiLz48dGV4dCB4PSIzMDYiIHk9IjIyNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2IwYmVjOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSJib2xkIj5QYWdlIDEgQmFja2dyb3VuZDwvdGV4dD48dGV4dCB4PSIzMDYiIHk9IjI0MSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2IwYmVjOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOSI+Q2xpY2sgwrcgZHJvcCDCtyBvciByZXBsYWNlIHZpYSBwYW5lbDwvdGV4dD48L3N2Zz4=" alt="" style="width:100%;height:100%;object-fit:cover;">
@@ -745,10 +746,10 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
       </div>
       <div class="p1-chal draggable-el" id="chal-box" data-label="Challenge box">
         <div class="box-hd" id="chal-hd" contenteditable="true" data-field="CHALLENGE_HEADING" data-label="Challenge heading">Challenge</div>
-        <div class="p1-ch-body" id="chal-body" contenteditable="true" data-field="CHALLENGE_BODY" data-label="Challenge body">Monitoring jet fuel inventory required staff to physically climb each tank and use a dipstick.</div>
-        <div class="p1-ch-intro" id="chal-intro" contenteditable="true" data-field="CHALLENGE_PAIN_INTRO" data-label="Challenge intro">This manual process created several costly challenges:</div>
-        <div class="blist" id="cb" data-field="CHALLENGE_BULLETS"><div class="brow" data-list="CHALLENGE_BULLETS"><span class="bsym">•</span><span class="btxt" contenteditable="true" data-field="CHALLENGE_BULLETS_ITEM">Staff required to physically climb tanks for every reading</span><button class="bdel" onclick="delBullet(this)" title="Remove bullet">✕</button></div><div class="brow" data-list="CHALLENGE_BULLETS"><span class="bsym">•</span><span class="btxt" contenteditable="true" data-field="CHALLENGE_BULLETS_ITEM">No real-time visibility between manual checks</span><button class="bdel" onclick="delBullet(this)" title="Remove bullet">✕</button></div><div class="brow" data-list="CHALLENGE_BULLETS"><span class="bsym">•</span><span class="btxt" contenteditable="true" data-field="CHALLENGE_BULLETS_ITEM">Risk of fuel-outs with no advance warning</span><button class="bdel" onclick="delBullet(this)" title="Remove bullet">✕</button></div></div>
-        <div class="p1-ch-quote" id="chal-quote" contenteditable="true" data-field="CHALLENGE_QUOTE" data-label="Challenge quote">”We had to climb to the top of the tank and use a long stick.” — Joe Schmo, President.</div>
+        <div class="p1-ch-body" id="chal-body" contenteditable="true" data-field="CHALLENGE_BODY" data-label="Challenge body"></div>
+        <div class="p1-ch-intro" id="chal-intro" contenteditable="true" data-field="CHALLENGE_PAIN_INTRO" data-label="Challenge intro"></div>
+        <div class="blist" id="cb" data-field="CHALLENGE_BULLETS"></div>
+        <div class="p1-ch-quote" id="chal-quote" contenteditable="true" data-field="CHALLENGE_QUOTE" data-label="Challenge quote"></div>
       </div>
       <div class="p1-footer draggable-el" id="p1-footer-el" data-label="Footer">
         <span class="footer-url" contenteditable="true" data-field="FOOTER_URL">www.TankScan.com</span>
@@ -773,25 +774,24 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
       </div>
       <div class="p2-sol draggable-el" id="sol-box" data-label="Solution box">
         <div class="box-hd" id="sol-hd" contenteditable="true" data-field="SOLUTION_HEADING" data-label="Solution heading">Solution</div>
-        <!-- trifecta-slot floats right inside sol-box so text wraps naturally around it.
-             Dragging it will convert it to position:absolute for free movement. -->
+        <div class="p2-sol-p1" id="sol-p1" contenteditable="true" data-field="SOLUTION_P1" data-label="Solution paragraph 1"></div>
+        <div class="p2-sol-p2" id="sol-p2" contenteditable="true" data-field="SOLUTION_P2" data-label="Solution paragraph 2"></div>
+        <!-- trifecta floats right here so sol-p1/p2 fill full width above, and sol-p3 wraps to its left -->
         <div class="img-slot draggable-el" id="trifecta-slot" data-img="TRIFECTA_IMAGE" data-label="Product photo">
           <img id="trifecta-img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTUiIGhlaWdodD0iMTQwIj48cmVjdCB3aWR0aD0iMjE1IiBoZWlnaHQ9IjE0MCIgZmlsbD0id2hpdGUiIHJ4PSI0IiBzdHJva2U9IiNjOGQ0ZTAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtZGFzaGFycmF5PSI1LDQiLz48dGV4dCB4PSIxMDciIHk9IjY1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjYjBiZWM4IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9ImJvbGQiPlByb2R1Y3QgUGhvdG88L3RleHQ+PHRleHQgeD0iMTA3IiB5PSI4MSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2IwYmVjOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOSI+Q2xpY2sgwrcgZHJvcCDCtyBvciByZXBsYWNlIHZpYSBwYW5lbDwvdGV4dD48L3N2Zz4=" alt="Product" style="object-fit:contain">
           <div class="img-hover"><div class="img-badge">🖱 Double-click<br>to change</div></div>
         </div>
-        <div class="p2-sol-p1" id="sol-p1" contenteditable="true" data-field="SOLUTION_P1" data-label="Solution paragraph 1">AquaPhoenix Scientific deployed the TankScan Wireless Tank Monitor on their jet fuel tanks in Hanover, PA.</div>
-        <div class="p2-sol-p2" id="sol-p2" contenteditable="true" data-field="SOLUTION_P2" data-label="Solution paragraph 2"></div>
-        <div class="p2-sol-p3" id="sol-p3" contenteditable="true" data-field="SOLUTION_P3" data-label="Solution paragraph 3">Automated alerts now notify the team when fuel drops below the reorder threshold.</div>
+        <div class="p2-sol-p3" id="sol-p3" contenteditable="true" data-field="SOLUTION_P3" data-label="Solution paragraph 3"></div>
       </div>
       <div class="p2-res draggable-el" id="res-box" data-label="Results box">
         <div class="box-hd" id="res-hd" contenteditable="true" data-field="RESULTS_HEADING" data-label="Results heading">Results</div>
-        <div class="p2-res-intro" id="res-intro" contenteditable="true" data-field="RESULTS_INTRO" data-label="Results intro">Since deploying TankScan, AquaPhoenix Scientific has transformed fuel management:</div>
-        <div class="blist" id="rb" data-field="RESULTS_BULLETS"><div class="brow" data-list="RESULTS_BULLETS"><span class="bsym">•</span><span class="btxt" contenteditable="true" data-field="RESULTS_BULLETS_ITEM">Real-time fuel data accessible from any device</span><button class="bdel" onclick="delBullet(this)" title="Remove bullet">✕</button></div><div class="brow" data-list="RESULTS_BULLETS"><span class="bsym">•</span><span class="btxt" contenteditable="true" data-field="RESULTS_BULLETS_ITEM">Automated alerts eliminate manual tank checks</span><button class="bdel" onclick="delBullet(this)" title="Remove bullet">✕</button></div><div class="brow" data-list="RESULTS_BULLETS"><span class="bsym">•</span><span class="btxt" contenteditable="true" data-field="RESULTS_BULLETS_ITEM">Proactive delivery scheduling prevents fuel-outs</span><button class="bdel" onclick="delBullet(this)" title="Remove bullet">✕</button></div></div>
-        <div class="p2-res-quote" id="res-quote" contenteditable="true" data-field="RESULTS_QUOTE" data-label="Results quote">”The convenience of getting automated text and email alerts has been a game changer.” — Joe Schmo, President.</div>
+        <div class="p2-res-intro" id="res-intro" contenteditable="true" data-field="RESULTS_INTRO" data-label="Results intro"></div>
+        <div class="blist" id="rb" data-field="RESULTS_BULLETS"></div>
+        <div class="p2-res-quote" id="res-quote" contenteditable="true" data-field="RESULTS_QUOTE" data-label="Results quote"></div>
       </div>
       <div class="p2-footer-group draggable-el" id="p2-footer-group" data-label="Page 2 footer">
         <div class="p2-docnum" contenteditable="true" data-field="DOC_NUMBER"
-             oninput="document.getElementById('meta-docnum').value=this.textContent.trim()">203-0041-000 Rev. A  4/11/2026</div>
+             oninput="document.getElementById('meta-docnum').value=this.textContent.trim()"></div>
         <div class="p2-ribbon"></div>
         <div class="p2-ribbon-txt">
           <span class="rc" contenteditable="true" data-field="RIBBON_COMPANY">AquaPhoenix Scientific</span>
@@ -1059,13 +1059,13 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
     <!-- META (always visible) -->
     <div class="meta-row">
       <div class="meta-lbl">Company Name</div>
-      <input class="meta-inp" id="meta-company" value="AquaPhoenix Scientific"
+      <input class="meta-inp" id="meta-company" value=""
              placeholder="Company name"
              oninput="setStatus('Company name updated')">
     </div>
     <div class="meta-row">
       <div class="meta-lbl">Document Number</div>
-      <input class="meta-inp" id="meta-docnum" value="203-0041-000 Rev. A  4/11/2026"
+      <input class="meta-inp" id="meta-docnum" value=""
              placeholder="203-0039-000 Rev. B  3/12/2026"
              oninput="const d=document.getElementById('docnum-display')||document.querySelector('[data-field=DOC_NUMBER]');if(d)d.textContent=this.value;setStatus('Doc number updated')">
     </div>
@@ -4546,12 +4546,15 @@ function _aiSetBullets(listId, field, items) {
     const row = document.createElement('div');
     row.className = 'brow';
     row.innerHTML =
-      '<span class="bsym">▸</span>' +
+      '<span class="bsym">•</span>' +
       '<span class="btxt" contenteditable="true" data-field="' + field + '_ITEM">' +
         txt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') +
       '</span>' +
       '<button class="bdel" onclick="delBullet(this)" title="Remove">✕</button>';
     list.appendChild(row);
+    // Wire each new span so the floating format bar can style bullet text
+    const span = row.querySelector('.btxt');
+    if (span) wireTextEl(span);
   });
   list.classList.add('ai-flash');
   setTimeout(() => list.classList.remove('ai-flash'), 1600);
@@ -4613,241 +4616,372 @@ function _jsBuildCaseStudy(rawText, overrides) {
   const today = new Date().toLocaleDateString('en-US',{year:'numeric',month:'numeric',day:'numeric'});
   const raw = rawText || '';
 
-  // ── Normalise ─────────────────────────────────────────────────────────────
+  // ── Normalise whitespace ──────────────────────────────────────────────────
   const clean = raw.replace(/\r\n/g,'\n').replace(/\t+/g,' ');
-  const lines  = clean.split('\n').map(l=>l.trim()).filter(Boolean);
-  const sents  = clean.split(/(?<=[.!?])\s+/).map(s=>s.trim()).filter(s=>s.length>15&&s.length<500);
 
-  // ── Extract verbatim quotes ───────────────────────────────────────────────
-  const quotes=[];
-  const qRx=/[“”‘’"']([\s\S](20, 350))[“”‘’"'][\s,]*(?:[—–\-]\s*)?([A-Z][a-z]+(?:\s[A-Z][a-z]+)(0, 3)(?:,\s*[^\n"'.](3, 60))?)?/g;
-  let qm; while((qm=qRx.exec(raw))!==null) quotes.push({text:qm[1].trim(),attr:(qm[2]||'').trim()});
+  // ── Garbage-word detector: reject tokens like "Re de Le Rr" ──────────────
+  function isGarbled(str) {
+    if (!str || str.length < 2) return true;
+    const words = str.trim().split(/\s+/);
+    if (words.length === 0) return true;
+    const shortCount = words.filter(w => w.replace(/[^a-zA-Z]/g,'').length <= 2).length;
+    // >60% very short words AND at least 4 words → garbled
+    if (words.length >= 4 && shortCount / words.length > 0.6) return true;
+    // Isolated single-cap-letter pattern: "R e d e" style
+    if (/^(?:[A-Z]\s+){3,}/.test(str.trim())) return true;
+    // OCR artifact characters (backslash, equals, pipe, caret as standalone tokens)
+    if (/(?:^|\s)[\\=|^#@](?:\s|$)/.test(str)) return true;
+    // More than 2 all-uppercase tokens longer than 2 chars → OCR scramble
+    const allCapsWords = words.filter(w => w.length > 2 && /^[A-Z0-9]+$/.test(w));
+    if (allCapsWords.length > 2) return true;
+    return false;
+  }
 
-  // ── Extract ALL numeric metrics ───────────────────────────────────────────
-  const metrics=[];
-  const mRx=/(?:\d[\d,\.]*\s*(?:hour|hr|minute|min|day|week|month|mile|trip|tank|gallon|gal|%|percent|\$|thousand|k)s?|\d+\s*(?:location|site|facilit|customer|driver|truck|stop)s?)/gi;
-  let mm; while((mm=mRx.exec(raw))!==null) metrics.push(mm[0].trim());
+  // ── Space normaliser: fix OCR double-spaces and "word - word" hyphens ─────
+  function fixSpaces(s) {
+    if (!s) return s;
+    return s
+      .replace(/\s+-\s+/g, '-')       // "real - time" → "real-time"
+      .replace(/\s{2,}/g, ' ')       // collapse multiple spaces
+      .replace(/\s+([.,;:!?])/g, '$1') // remove space before punctuation
+      .trim();
+  }
 
-  // ── Extract location ──────────────────────────────────────────────────────
-  const locRx=/(?:located|based|headquartered|office)\s+(?:in|at)\s+([A-Z][A-Za-z\s]+,\s*[A-Z]{2})/;
-  const locMatch=raw.match(locRx);
-  const companyLoc=locMatch?locMatch[1].trim():'';
+  // ── Template-question filter: skip unfilled interview prompts ─────────────
+  function isPrompt(str) {
+    const s = str.trim();
+    // Ends with a naked question, or contains common template patterns
+    if (/^(what|how|when|why|where|did|does|do|can|is|are|were|was)\b/i.test(s)) return true;
+    if (/if yes,?\s*how/i.test(s)) return true;
+    if (/\b(your answer|describe here|please explain|enter.*here|type.*here)\b/i.test(s)) return true;
+    // Short naked question (no context, ends with "?")
+    if (s.endsWith('?') && s.length < 120) return true;
+    return false;
+  }
+
+  // ── Split into sentences, filtering prompts & garbage ────────────────────
+  const rawLines = clean.split('\n').map(l=>l.trim()).filter(Boolean);
+  const allSents = clean.split(/(?<=[.!?])\s+|\n/).map(s=>s.trim())
+    .filter(s => s.length > 15 && s.length < 500 && !isPrompt(s) && !isGarbled(s));
+
+  // ── Extract verbatim quotes (all quote char variants) ────────────────────
+  // Strip them out of the sentence pool so they don't pollute buckets
+  const quotes = [];
+  // Match straight and curly quotes
+  const Q = '["“‘’]';
+  const QC = '["”‘’]';
+  const qRx = new RegExp(Q + '([^"“”‘’]{15,300})' + QC +
+    '[,\s]*(?:[—–\-]\s*)?([A-Z][a-z]+(?:\s[A-Z][a-z]+){0,3}(?:,\s*[A-Za-z][A-Za-z\s&.]{4,50})?)?', 'g');
+  let qm;
+  while ((qm = qRx.exec(raw)) !== null) {
+    const txt = qm[1].trim();
+    const atr = (qm[2]||'').trim();
+    // Skip garbled OCR text in quotes
+    if (txt.length >= 15 && !isGarbled(txt)) quotes.push({text:txt, attr:atr});
+  }
+
+  // Build quote-stripped version for sentence classification
+  const allQuoteRx = new RegExp('["“‘][^"“”‘’]{5,400}["”’]', 'g');
+  const rawNoQ = raw.replace(allQuoteRx, ' ');
+  const sentsNoQ = rawNoQ.split(/(?<=[.!?])\s+|\n|[•·▸▶]/).map(s=>s.trim())
+    .filter(s => s.length > 15 && s.length < 500 && !isPrompt(s) && !isGarbled(s) && !s.endsWith(':'));
+
+  // ── Extract numeric metrics ───────────────────────────────────────────────
+  const metrics = [];
+  const mRx = /(\d[\d,.]*)\s*(hour|hr|minute|min|day|week|month|mile|trip|tank|gallon|gal|%|percent|\$|thousand|k)s?/gi;
+  let mm; while ((mm=mRx.exec(raw))!==null) metrics.push(mm[0].trim());
+
+  // ── Company location ──────────────────────────────────────────────────────
+  const locM = raw.match(/(?:located|based|headquartered|office)\s+(?:in|at)\s+([A-Z][A-Za-z\s]+,\s*[A-Z]{2})/);
+  const companyLoc = locM ? locM[1].trim() : '';
 
   // ── Detect tank types ─────────────────────────────────────────────────────
-  const TTYPES=[
-    [/bulk\s*storage/i,'bulk storage tanks'],[/customer\s*tank/i,'customer tanks'],
-    [/underground/i,'underground storage tanks'],[/above.?ground/i,'aboveground tanks'],
-    [/\btote\b/i,'chemical tote tanks'],[/c.?store|convenience\s*store/i,'C-store tanks'],
-    [/generator/i,'generator fuel tanks'],[/propane/i,'propane tanks'],
-    [/diesel/i,'diesel tanks'],[/water\s*tank/i,'water tanks'],
-    [/chemical\s*tank/i,'chemical tanks'],[/lube|lubricant/i,'lubricant tanks'],
+  const TTYPES = [
+    [/bulk\s*storage/i,'bulk storage tanks'], [/customer\s*tank/i,'customer tanks'],
+    [/underground/i,'underground storage tanks'], [/above.?ground/i,'aboveground tanks'],
+    [/\btote\b/i,'chemical tote tanks'],     [/c.?store|convenience\s*store/i,'C-store tanks'],
+    [/generator/i,'generator fuel tanks'],     [/propane/i,'propane tanks'],
+    [/diesel/i,'diesel tanks'],                [/water\s*tank/i,'water tanks'],
+    [/chemical\s*tank/i,'chemical tanks'],     [/lube|lubricant/i,'lubricant tanks'],
     [/fuel\s*tank/i,'fuel tanks'],
   ];
-  const tankTypes=TTYPES.filter(([rx])=>rx.test(raw)).map(([,n])=>n).slice(0,2);
-  const tankStr=tankTypes.length?tankTypes.join(' and '):'tanks';
+  const tankTypes = TTYPES.filter(([rx])=>rx.test(raw)).map(([,n])=>n).slice(0,2);
+  const tankStr   = tankTypes.length ? tankTypes.join(' and ') : 'tanks';
 
   // ── Market / Application ──────────────────────────────────────────────────
-  const MKT=[
-    [/diesel exhaust fluid|\bdef\b/i,                'Specialty Chemicals','DEF Tank Monitoring'],
-    [/de.?ic/i,                                        'Specialty Chemicals','De-icer Tank Monitoring'],
-    [/chemical tote/i,                                 'Specialty Chemicals','Chemical Tote Monitoring'],
+  const MKT = [
+    // Municipality check FIRST — government/municipal entities = Fleet Management regardless of waste-oil mentions
+    [/\b(Town|City|County|Township|Village|Municipality|Borough|District)\s+of\b/i, 'Fleet Management','Municipal Fuel Monitoring'],
+    [/\b(municipal|government|public works|public sector)\s+(fuel|fleet|operations|department|facility)/i, 'Fleet Management','Municipal Fuel Monitoring'],
+    [/\bfleet\b|municipal\s*fuel|fleet\s*fuel/i,   'Fleet Management','Fleet Fuel Monitoring'],
+    [/\bdef\b|diesel exhaust fluid/i,             'Specialty Chemicals','DEF Tank Monitoring'],
+    [/\bde.?icer\b|de-icing/i,                    'Specialty Chemicals','De-icer Tank Monitoring'],
+    [/chemical tote/i,                               'Specialty Chemicals','Chemical Tote Monitoring'],
     [/specialty chem|solvent|\bacid\b|resin|glycerin/i,'Specialty Chemicals','Chemical Tank Monitoring'],
-    [/used oil|waste oil|waste liquid/i,               'Environmental Mgmt.','Used Oil / Waste Collection'],
-    [/wastewater|storm\s*water/i,                     'Environmental Mgmt.','Wastewater Monitoring'],
-    [/oil\s*field|produced water/i,                   'Oil Field Support','Oil Field Tank Monitoring'],
-    [/c.?store|convenience\s*store/i,                 'C-Store Petroleum','C-Store Fuel Monitoring'],
-    [/fertilizer|\bcrop\b|agriculture|\bfarm\b/i,  'Agriculture','Agricultural Liquid Monitoring'],
-    [/water\s*(tank|management|supply|well)/i,        'Water Management','Water Tank Monitoring'],
-    [/lubricant|lube oil|motor oil/i,                  'Lubricants','Lubricant Inventory Mgmt.'],
-    [/fuel|petroleum|gasoline|bulk fuel/i,             'Fuel Delivery','Fuel Inventory / Delivery'],
-    [/manufactur|industrial fluid/i,                   'Manufacturing','Industrial Fluid Monitoring'],
+    [/used oil|waste oil|waste liquid/i,             'Environmental Mgmt.','Used Oil / Waste Collection'],
+    [/wastewater|storm\s*water/i,                    'Environmental Mgmt.','Wastewater Monitoring'],
+    [/oil\s*field|produced water/i,                  'Oil Field Support','Oil Field Tank Monitoring'],
+    [/c.?store|convenience\s*store/i,                'C-Store Petroleum','C-Store Fuel Monitoring'],
+    [/fertilizer|\bcrop\b|agriculture|\bfarm\b/i,'Agriculture','Agricultural Liquid Monitoring'],
+    [/water\s*(tank|management|supply|well)/i,       'Water Management','Water Tank Monitoring'],
+    [/lubricant|lube oil|motor oil/i,                'Lubricants','Lubricant Inventory Mgmt.'],
+    [/\b(town|city|county|municipality|municipal)\b.*fuel|fuel.*\b(town|city|county|municipality|municipal)\b/i, 'Fleet Management','Fleet Fuel Monitoring'],
+    [/petroleum|gasoline|bulk fuel|fuel oil|fuel distributor|fuel delivery/i,'Fuel Delivery','Fuel Inventory / Delivery'],
+    [/fuel/i,                                        'Fuel Delivery','Fuel Inventory / Delivery'],
+    [/manufactur|industrial fluid/i,                 'Manufacturing','Industrial Fluid Monitoring'],
   ];
   let market=ovMarket, app=ovApp;
-  if(!market||!app) for(const [rx,mkt,ap] of MKT) if(rx.test(raw)){market=market||mkt;app=app||ap;break;}
-  market=market||'Industrial'; app=app||'Tank Level Monitoring';
+  if (!market||!app) for (const [rx,mkt,ap] of MKT) if (rx.test(raw)) {market=market||mkt; app=app||ap; break;}
+  market = market||'Industrial'; app = app||'Tank Level Monitoring';
 
   // ── Company name ──────────────────────────────────────────────────────────
-  let company=ovCompany;
-  if(!company){
-    const p1=raw.match(/^([A-Z][A-Za-z0-9&,\.\s]{2,50}?)\s+(?:is a|is an|was |has been|operates|provides|specializes|deployed|installed|chose|selected)/m);
-    if(p1) company=p1[1].trim().replace(/[,\.]+$/,'');
+  let company = ovCompany;
+  if (!company) {
+    // Try municipality patterns first
+    const mun = raw.match(/\b((?:The\s+)?(?:Town|City|County|Township|Village|Municipality|Borough|District)\s+of\s+[A-Z][A-Za-z]+(?:\s(?!The|Of|In|And|Is|Are|Was|Were|The)[A-Z][A-Za-z]+){0,1})/);
+    if (mun) company = mun[1].trim();
   }
-  if(!company){
-    const cand=lines.find(l=>
-      l.length>3&&l.length<55&&/^[A-Z]/.test(l)&&!/[.?!:,]$/.test(l)&&
-      !/^(The|This|Our|We|In|At|By|For|Challenge|Solution|Result|Application|Market|Background|Overview|About|Summary|Introduction|Case Study|TankScan)/i.test(l)&&
-      /[A-Z]/.test(l.slice(1))
+  if (!company) {
+    const p1 = rawNoQ.match(/^([A-Z][A-Za-z0-9&,.\s]{2,50}?)\s+(?:is a|is an|was |has been|operates|provides|specializes|deployed|installed|chose|selected)/m);
+    if (p1) {
+      const cand = p1[1].trim().split('\n')[0].replace(/[,.]+$/,'').trim();
+      if (!isGarbled(cand)) company = cand;
+    }
+  }
+  if (!company) {
+    const cand = rawLines.find(l =>
+      l.length > 4 && l.length < 55 && /^[A-Z]/.test(l) && !/[.?!:,]$/.test(l) &&
+      !/^(The|This|Our|We|In|At|By|For|Challenge|Solution|Result|Application|Market|Background|Overview|About|Summary|Introduction|Case Study|TankScan|Before|After|Since|Prior)/i.test(l) &&
+      !isGarbled(l) && !isPrompt(l)
     );
-    if(cand) company=cand;
+    if (cand) company = cand.split('\n')[0].trim();
   }
-  if(!company){
-    const p3=raw.match(/([A-Z][A-Za-z0-9\s&\.](2, 40)?)(?:\s+(?:distributes|sells|manages|supplies|delivers|services|handles|operates))/);
-    if(p3) company=p3[1].trim();
-  }
-  company=company||'the Customer';
+  company = (company||'the Customer').split('\n')[0].trim().slice(0,50).replace(/[,.]+$/,'');
 
   // ── Contact name & title ──────────────────────────────────────────────────
   let cname=ovCname, ctitle=ovCtitle;
-  if(!cname){
-    const p1=raw.match(/(?:said|says|according to|notes|explained|added|commented)\s+([A-Z][a-z]+(?:\s[A-Z][a-z]+){1,2}),?\s*([A-Za-z][A-Za-z\s&\.](4, 50)?)?(?=[.,"'\n]|$)/);
-    if(p1){cname=p1[1].trim();if(p1[2]&&/manager|director|president|vp|owner|operator|chief|supervisor/i.test(p1[2]))ctitle=p1[2].trim().replace(/[,\.]+$/,'');}
+  if (!cname) {
+    const p1 = raw.match(/(?:said|says|according to|explained|noted|added)\s+([A-Z][a-z]+(?:\s[A-Z][a-z]+){1}),?\s*([A-Za-z][A-Za-z\s&.]{4,50}?)?(?=[.,"'\n]|$)/);
+    if (p1) { cname=p1[1].trim(); if(p1[2]&&/manager|director|president|vp|owner|operator|chief|supervisor|coordinator/i.test(p1[2])) ctitle=p1[2].trim().replace(/[,.]+$/,''); }
   }
-  if(!cname){
-    const p2=raw.match(/[—–\-]\s*([A-Z][a-z]+(?:\s[A-Z][a-z]+){1,2}),?\s*([A-Za-z][A-Za-z\s&\.](4, 50)?)?(?=[.,"'\n]|$)/);
-    if(p2){cname=p2[1].trim();if(p2[2]&&/manager|director|president|vp|owner|operator|chief/i.test(p2[2]))ctitle=p2[2].trim().replace(/[,\.]+$/,'');}
+  if (!cname) {
+    const p2 = raw.match(/[—–\-]\s*([A-Z][a-z]+(?:\s[A-Z][a-z]+){1}),?\s*([A-Za-z][A-Za-z\s&.]{4,50}?)?(?=[.,"'\n]|$)/);
+    if (p2) { cname=p2[1].trim(); if(p2[2]&&/manager|director|president|vp|owner|operator|chief|supervisor/i.test(p2[2])) ctitle=p2[2].trim().replace(/[,.]+$/,''); }
   }
 
   // ── Classify sentences ────────────────────────────────────────────────────
-  const KC=/\b(manual|manually|had to|required|concern|problem|challenge|difficult|time.consuming|inefficien|would have|needed to|climb|dipstick|drive to|travel to|guess|estimate|no real.?time|no visib|lack of|couldn.t|could not|risk of|stick the tank|unsafe|dangerous|unreliable|inaccur|before TankScan|prior to|previously|used to|without a system|no system|no way to)\b/i;
-  const KS=/\b(tankscan|tank scan|wireless|sensor|monitor|install|deploy|system|alert|notification|web portal|mobile|cloud|real.?time|automat|solution|level sensor)\b/i;
-  const KR=/\b(now |since |no longer|eliminat|reduc|improv|save|saved|automat|efficient|cut |faster|better|able to|can now|never have to|peace of mind|transform|streamline|visib|proactive|gain|increas|decreas|result)\b/i;
-  const chalS=[],solS=[],resS=[],coS=[];
+  const KC = /\b(manual|manually|had to|required|problem|challenge|difficult|time.consuming|inefficien|would have|needed to|climb|dipstick|dip the|drive to|travel to|guess|estimate|no real.?time|no visib|lack of|couldn.t|could not|risk of|stick the tank|unsafe|dangerous|unreliable|inaccur|before TankScan|prior to|previously|used to|without a system|no system|no way to|no automated)/i;
+  const KS = /\b(tankscan|tank scan|wireless|sensor|monitor|install|deploy|system|alert|notification|web portal|mobile|cloud|real.?time|automat|solution|level sensor)\b/i;
+  const KR = /\b(now |since |no longer|eliminat|reduc|improv|save|saved|automat|efficient|cut |faster|better|able to|can now|never have to|peace of mind|transform|streamline|proactive|gain|increas|decreas)/i;
+  const chalS=[], solS=[], resS=[], coS=[];
 
-  for(const s of sents){
-    const ic=KC.test(s),is=KS.test(s),ir=KR.test(s);
-    const isCo=(s.toLowerCase().includes(company.toLowerCase())||/\b(founded|established|family.owned|located|specializes|operates|provides|offers|serves|manages|distributes|headquartered|been in business|years? in|year.old|employee)\b/i.test(s))&&!ic&&!is;
-    if(isCo) coS.push(s);
-    else if(ic&&!is) chalS.push(s);
-    else if(is&&!ir) solS.push(s);
-    else if(ir&&!ic) resS.push(s);
+  for (const s of sentsNoQ) {
+    const ic=KC.test(s), is=KS.test(s), ir=KR.test(s);
+    const coKey = company !== 'the Customer' ? company.toLowerCase().slice(0,12) : 'xxxxxxxx';
+    const isCo = (s.toLowerCase().includes(coKey) ||
+      /\b(founded|established|family.owned|located|specializes|operates|provides|offers|serves|manages|distributes|headquartered|been in business|employee|municipality|municipal)\b/i.test(s)) && !ic && !is;
+    // ic+ir together = "eliminated/improved manual X" → result; ic alone = challenge
+    if      (isCo)           coS.push(s);
+    else if (ic && ir)       resS.push(s);
+    else if (ic)             chalS.push(s);
+    else if (is && !ir)      solS.push(s);
+    else if (ir)             resS.push(s);
   }
 
   // ── Tank count & location word ────────────────────────────────────────────
-  const tcm=raw.match(/(\d+)\s*(?:tank|monitor|unit|sensor)s?/i);
-  const tankCount=tcm?tcm[1]:'';
-  const locWord=/customer\s*(site|loc)/i.test(raw)?'customer locations'
-              :/farm|field/i.test(raw)?'field locations'
-              :/facilit|plant/i.test(raw)?'facilities'
-              :/store|station/i.test(raw)?'locations'
-              :'locations';
+  const tcm = raw.match(/(\d+)\s*(?:tank|monitor|unit|sensor)s?/i);
+  const tankCount = tcm ? tcm[1] : '';
+  const locWord = /customer\s*(site|loc)/i.test(raw)?'customer locations'
+                :/farm|field/i.test(raw)?'field locations'
+                :/facilit|plant/i.test(raw)?'facilities'
+                :/municipal|town|city/i.test(raw)?'municipal facilities'
+                :'locations';
 
   // ── Helpers ───────────────────────────────────────────────────────────────
-  const cap = s => s.replace(/^[a-z]/,c=>c.toUpperCase());
-  const trimPunct = s => s.replace(/[.!?,]+$/,'').trim();
-  const shortBullet = s => cap(trimPunct(
-    s.replace(/^(This|It|That|The process|Staff|Employees|They|We|The team|The company)\s+/i,'')
-  )).slice(0,80);
+  const cap       = s => s.replace(/^[a-z]/,c=>c.toUpperCase());
+  const trimPunct = s => s.replace(/[.!?,\s]+$/,'').trim();
+  const toBullet  = s => {
+    // Strip "Category Name: actual text" prefixes (e.g. "Time and Cost Savings: Eliminated trips...")
+    let t = s.replace(/^[A-Z][A-Za-z &]{2,30}:\s+/, '');
+    // Strip common sentence starters
+    t = t.replace(/^(This|It|That|The process|Staff|Employees|They|We|The team|The company|There was|There were|Operators)\s+/i,'');
+    t = fixSpaces(trimPunct(t));
+    // Truncate at word boundary (never mid-word)
+    if (t.length > 120) {
+      const cut = t.lastIndexOf(' ', 120);
+      t = t.slice(0, cut > 60 ? cut : 120);
+    }
+    return cap(t);
+  };
 
   // ── Company description ───────────────────────────────────────────────────
-  const coDesc=(()=>{
-    if(coS.length) return coS.slice(0,2).join(' ');
-    const locPart=companyLoc?` located in ${companyLoc}`:'';
-    return `${company} is a company${locPart} operating in the ${market.toLowerCase()} sector. They selected TankScan wireless tank monitors to gain real-time inventory visibility across their ${tankStr} and improve operational efficiency.`;
+  const coKey12 = company.toLowerCase().slice(0,12);
+  // Clean merged OCR header+description sentences: if company name appears twice,
+  // strip everything before the second occurrence (the first is in the header junk)
+  const cleanCoSent = s => {
+    if (coKey12.length < 5) return s;
+    const lower = s.toLowerCase();
+    const first = lower.indexOf(coKey12);
+    if (first < 0) return s;
+    const second = lower.indexOf(coKey12, first + coKey12.length);
+    if (second > first + coKey12.length) {
+      // Preserve leading article "The " if it appears just before the second occurrence
+      const theOffset = second >= 4 && lower.slice(second - 4, second) === 'the ' ? 4 : 0;
+      return s.slice(second - theOffset).trim();
+    }
+    return s;
+  };
+  const coFiltered = coS
+    .filter(s => s.length > 70 && (s.toLowerCase().includes(coKey12) || /\b(founded|established|family.owned|headquartered|been in business|employs|year.old|serves|managing|municipality|municipal)\b/i.test(s)))
+    .map(cleanCoSent)
+    .filter(s => s.length > 30);
+  const coDesc = (() => {
+    if (coFiltered.length) return coFiltered.slice(0,2).join(' ');
+    const locPart = companyLoc ? ` located in ${companyLoc}` : '';
+    return `${company} is an organization${locPart} that selected TankScan wireless tank monitors to gain real-time inventory visibility across their ${tankStr} and improve operational efficiency.`;
   })();
 
   // ── Challenge body ────────────────────────────────────────────────────────
-  const bestChal=chalS.find(s=>s.length>40)||'';
-  const chalBody=(()=>{
-    if(bestChal) return bestChal;
-    const acts=[];
-    if(/climb|top of the tank/i.test(raw)) acts.push('physically climbing each tank');
-    if(/dipstick|stick/i.test(raw)) acts.push('using a dipstick for measurements');
-    if(/drive|travel|visit/i.test(raw)) acts.push('driving to each location');
-    if(/call|phone|radio/i.test(raw)) acts.push('calling each site for level updates');
-    const doing=acts.length?acts.join(' and '):'performing manual tank level measurements';
+  const bestChal = chalS.find(s=>s.length>40) || '';
+  const chalBody = (() => {
+    if (bestChal) return bestChal;
+    const acts = [];
+    if (/climb|top of the tank/i.test(raw)) acts.push('physically climbing each tank');
+    if (/dipstick|dip the tank|stick/i.test(raw)) acts.push('using a dipstick for measurements');
+    if (/drive|travel|visit/i.test(raw)) acts.push('driving to each location');
+    if (/call|phone/i.test(raw)) acts.push('calling each site for level updates');
+    const doing = acts.length ? acts.join(' and ') : 'performing manual tank level measurements';
     return `${company} was managing inventory by ${doing} at their ${tankStr}. This time-consuming process made it difficult to maintain accurate inventory data and schedule deliveries efficiently.`;
   })();
-  const chalIntro=`This created several ongoing challenges for ${company}:`;
+  const chalIntro = `This created several ongoing challenges for ${company}:`;
 
   // ── Challenge bullets ─────────────────────────────────────────────────────
-  let chalBullets=chalS.slice(0,4).map(shortBullet).filter(b=>b.length>12);
-  const FB=[
-    /climb|top of.*tank|physical/i.test(raw)?'Manual measurements required staff to physically visit and climb each tank':null,
-    /drive|travel|mile|trip/i.test(raw)?`Costly site visits${metrics.find(m=>/mile|trip/i.test(m))?' ('+metrics.find(m=>/mile|trip/i.test(m))+' per period)':''}`:null,
-    /run.?out|stockout|empty/i.test(raw)?'Risk of unexpected product run-outs with no early warning':null,
-    /safe|osha|danger|hazard/i.test(raw)?'Safety concerns from manual measurement methods':null,
-    /dispatch|route|schedule/i.test(raw)?'Inefficient delivery routing without real-time inventory data':null,
-    /guess|estimate|inaccur/i.test(raw)?'Inaccurate inventory estimates between manual measurement rounds':null,
+  let chalBullets = chalS.filter(s=>s!==bestChal).slice(0,4).map(toBullet).filter(b=>b.length>12);
+  const FB = [
+    /climb|top of.*tank|physical/i.test(raw)   ? 'Manual measurements required staff to physically visit and climb each tank' : null,
+    /drive|travel|mile|trip/i.test(raw)         ? 'Costly site visits required to obtain inventory readings' : null,
+    /run.?out|stockout|empty/i.test(raw)        ? 'Risk of unexpected product run-outs with no advance warning' : null,
+    /safe|osha|danger|hazard/i.test(raw)        ? 'Safety concerns from manual measurement methods' : null,
+    /dispatch|route|schedul/i.test(raw)         ? 'Inefficient delivery routing without real-time inventory data' : null,
+    /guess|estimate|inaccur/i.test(raw)         ? 'Inaccurate inventory estimates between manual rounds' : null,
   ].filter(Boolean);
-  if(!FB.length) FB.push(
+  if (!FB.length) FB.push(
     'Manual measurements consumed valuable staff time',
     'No real-time visibility into inventory levels between site visits',
     'Reactive delivery scheduling led to unnecessary trips and run-out risk'
   );
-  while(chalBullets.length<3) chalBullets.push(FB[chalBullets.length]||FB[0]);
-  chalBullets=chalBullets.slice(0,4);
+  while (chalBullets.length < 3) chalBullets.push(FB[chalBullets.length % FB.length]);
+  chalBullets = chalBullets.slice(0,4);
 
-  // ── Challenge quote ───────────────────────────────────────────────────────
-  const chalQ=quotes.find(q=>KC.test(q.text)||/before|manual|used to|climb|stick/i.test(q.text));
-  const baseAttr=cname?` — ${cname}${ctitle?', '+ctitle+',':','} ${company}.`:'';
-  const chalQuote=chalQ?`"${chalQ.text}"${chalQ.attr?' — '+chalQ.attr+'.':baseAttr}`:'';
+  // ── Quotes ────────────────────────────────────────────────────────────────
+  const KC_light = /manual|used to|had to|before|climb|stick|drive|no way|couldn|difficult|dip|prior/i;
+  const KR_light = /now|no longer|able to|can see|game changer|peace|eliminat|never have|saving|save/i;
+  const chalQ = quotes.find(q => KC_light.test(q.text));
+  const resQ  = quotes.find(q => KR_light.test(q.text) && q !== chalQ) || quotes.find(q => q !== chalQ);
+  // TankScan quote style — formal English grammar:
+  // "Quote text," said Name, Title.  /  "Quote text," said Name.
+  // Comma replaces period inside closing quote mark; "said" is lowercase.
+  // isFirst=true → include title; isFirst=false → name only
+  const fmtQ = (q, isFirst) => {
+    if (!q) return '';
+    const t = trimPunct(q.text);   // strip trailing . ! ? , from quote text
+    // Prefer modal-supplied name/title; fall back to attribution extracted from text
+    const nm = cname || (q.attr ? q.attr.split(',')[0].trim() : '');
+    const ti = ctitle || '';
+    if (!nm) return `"${t}."`;
+    if (isFirst && ti) return `"${t}," said ${nm}, ${ti}.`;
+    return `"${t}," said ${nm}.`;
+  };
+  const chalQuote = fmtQ(chalQ, true);   // first quote → Name, Title
+  const resQuote  = fmtQ(resQ,  false);  // others → Name only
 
   // ── Solution ──────────────────────────────────────────────────────────────
-  const solExtracted=solS.filter(s=>s.length>40).slice(0,2).join(' ').trim();
-  const tankCountPhrase=tankCount?` on ${tankCount} tanks across their ${locWord}`:'';
-  const solP1=solExtracted.length>40
+  // Exclude solution sentences that are really challenge sentences in disguise
+  const solClean = solS.filter(s => !KC.test(s) && s.length > 40);
+  const solExtracted = solClean.slice(0,2).join(' ').trim();
+  const tankCountPhrase = tankCount ? ` on ${tankCount} tanks across their ${locWord}` : '';
+  const solP1 = solExtracted.length > 40
     ? solExtracted.replace(/\bTankScan\b(?!\s+Wireless|\s+monitor)/gi,'<b>TankScan Wireless Tank Monitor</b>')
     : `${company} deployed the <b>TankScan Wireless Tank Monitor</b>${tankCountPhrase}, providing continuous real-time inventory data accessible via web browser or mobile device — from the office, from home, or from anywhere in the field.`;
-  const solP3=resS.length?trimPunct(resS[0])+'.':'';
+  const solP2 = `The <b>TankScan</b> AIP system automatically sends text and email alerts when levels drop below a preset threshold — giving ${company} the visibility needed to schedule proactive, just-in-time deliveries and eliminate emergency runs.`;
+  // P3 = 3rd unused quote formatted as a blue italic direct quote; fallback to 'NA'
+  // Always rendered in quote style (is-quote) so user can type directly without reformatting
+  const solQ = quotes.find(q => q !== chalQ && q !== resQ);
+  let solP3IsQuote = true;   // always blue-italic so 'NA' placeholder is easy to replace
+  let solP3 = solQ ? fmtQ(solQ, false) : 'NA';
 
   // ── Results ───────────────────────────────────────────────────────────────
-  const resultsIntro=`Through the use of the TankScan solution, ${company} realizes numerous benefits including:`;
-  let resBullets=resS.slice(0,3).map(shortBullet).filter(b=>b.length>12);
-  const tripMetric=metrics.find(m=>/trip|visit|mile/i.test(m));
-  const timeMetric=metrics.find(m=>/hour|hr|minute|day|week/i.test(m));
-  const FB2=[
-    /manual|climb|visit/i.test(raw)?'Eliminated manual tank measurements, freeing staff for higher-value work':null,
-    /route|dispatch|delivery/i.test(raw)?'Optimized delivery routes using live inventory data from all tank locations':null,
-    /run.?out|runout|stockout/i.test(raw)?'Eliminated the risk of unexpected product run-outs through proactive alerts':null,
-    /safe|climb|hazard/i.test(raw)?'Improved personnel safety by removing the need for manual, on-site readings':null,
-    tripMetric?`Reduced unnecessary site trips — ${tripMetric} saved`:null,
-    timeMetric?`${cap(timeMetric)} recovered by automating inventory checks`:null,
+  const resultsIntro = `Through the use of the TankScan solution, ${company} realizes numerous benefits including:`;
+  let resBullets = resS.filter(s=>!isPrompt(s)).slice(0,3).map(toBullet).filter(b=>b.length>12);
+  const tripM = metrics.find(m=>/trip|visit|mile/i.test(m));
+  const timeM = metrics.find(m=>/hour|hr|minute|day|week/i.test(m));
+  const pctM  = metrics.find(m=>/%|percent/i.test(m));
+  const FB2 = [
+    /manual|climb|visit/i.test(raw)      ? 'Eliminated manual tank measurements, freeing staff for higher-value work' : null,
+    /route|dispatch|delivery/i.test(raw) ? 'Optimized delivery routes using live inventory data from all tank locations' : null,
+    /run.?out|runout|stockout/i.test(raw)? 'Eliminated risk of unexpected product run-outs through proactive alerts' : null,
+    /safe|climb|hazard/i.test(raw)       ? 'Improved personnel safety by removing the need for manual on-site readings' : null,
+    tripM                                ? `Reduced unnecessary site trips — ${tripM} saved` : null,
+    timeM                                ? `${cap(timeM)} recovered by automating inventory checks` : null,
+    pctM                                 ? `Measurable efficiency gain — ${pctM}` : null,
   ].filter(Boolean);
-  const FB2always=[
+  const always = [
     '24/7 access to real-time tank levels from any web-connected device',
     'Proactive, just-in-time delivery scheduling replacing reactive emergency runs',
     `Real-time visibility across all ${tankStr} from a single dashboard`,
   ];
-  while(resBullets.length<3){
-    const next=FB2[resBullets.length]||FB2always[resBullets.length%3];
-    if(next) resBullets.push(next);
-    else break;
+  // De-dupe: remove metric bullets that repeat info already in resBullets
+  const rbText = resBullets.join(' ').toLowerCase();
+  const dedupFB2 = FB2.filter(b => !b || !rbText.includes(b.slice(0,15).toLowerCase()));
+  while (resBullets.length < 3) {
+    const next = dedupFB2[resBullets.length] || always[resBullets.length % 3];
+    if (next) resBullets.push(next); else break;
   }
-  resBullets=resBullets.slice(0,4);
-
-  // ── Results quote ─────────────────────────────────────────────────────────
-  const resQ=quotes.find(q=>KR.test(q.text)&&q!==chalQ)||quotes.find(q=>q!==chalQ);
-  const resQuote=resQ?`"${resQ.text}"${resQ.attr?' — '+resQ.attr+'.':baseAttr}`:'';
+  resBullets = resBullets.slice(0,4);
 
   // ── Title ─────────────────────────────────────────────────────────────────
-  const TITLES=[
-    [/eliminat.*manual|no longer.*manual|no more.*manual/i,`${company} Eliminates Manual Tank Monitoring with TankScan`],
-    [/route|dispatch/i,    `TankScan Helps ${company} Streamline Delivery Routes and Inventory`],
-    [/run.?out|runout/i,   `${company} Prevents Costly Run-Outs with Real-Time Tank Monitoring`],
-    [/safe|climb|hazard/i, `${company} Improves Safety and Efficiency with TankScan`],
+  const TITLES = [
+    [/eliminat.*manual|no longer.*manual/i, `${company} Eliminates Manual Tank Monitoring with TankScan`],
+    [/route|dispatch/i,     `TankScan Helps ${company} Streamline Delivery Routes and Inventory`],
+    [/run.?out|runout/i,    `${company} Prevents Costly Run-Outs with Real-Time Tank Monitoring`],
+    [/safe|climb|hazard/i,  `${company} Improves Safety and Efficiency with TankScan`],
+    [/\bfleet\b/i,         `TankScan Helps ${company} Manage Fleet Fuel Inventory`],
     [/cost|\bsave\b|reduc/i,`${company} Reduces Costs and Improves Efficiency with TankScan`],
-    [/forecast|on.?time/i, `${company} Improves Forecasting and On-Time Deliveries with TankScan`],
-    [/fuel|petroleum|gasoline|bulk fuel/i,`TankScan Helps ${company} Streamline Fuel Inventory Management`],
+    [/forecast|on.?time/i,  `${company} Improves Forecasting and On-Time Deliveries with TankScan`],
+    [/fuel|petroleum|gasoline/i,`TankScan Helps ${company} Streamline Fuel Inventory Management`],
     [/lubricant|\blube\b/i,`${company} Improves Lubricant Inventory Management with TankScan`],
-    [/chemical|solvent/i,  `${company} Optimizes Chemical Tank Monitoring with TankScan`],
-    [/water\b/i,           `${company} Achieves Reliable Water Management with TankScan`],
+    [/chemical|solvent/i,   `${company} Optimizes Chemical Tank Monitoring with TankScan`],
+    [/water\b/i,            `${company} Achieves Reliable Water Management with TankScan`],
   ];
-  let titleLine=`TankScan Helps ${company} Gain Real-Time Inventory Visibility`;
-  for(const [rx,t] of TITLES) if(rx.test(raw)){titleLine=t;break;}
-  let L1=titleLine,L2='';
-  if(titleLine.length>50){
-    const sp=titleLine.lastIndexOf(' ',50);
-    L1=titleLine.slice(0,sp>20?sp:50);
-    L2=titleLine.slice(L1.length).trim();
+  let titleLine = `TankScan Helps ${company} Gain Real-Time Inventory Visibility`;
+  for (const [rx,t] of TITLES) if (rx.test(raw)) { titleLine=t; break; }
+  let L1=titleLine, L2='';
+  if (titleLine.length > 50) {
+    const sp = titleLine.lastIndexOf(' ', 50);
+    L1 = titleLine.slice(0, sp>20?sp:50);
+    L2 = titleLine.slice(L1.length).trim();
   }
 
+  // Apply space normalisation to all plain-text fields
+  const fs = fixSpaces;
   return {
-    CASE_TITLE_L1:        L1,
-    CASE_TITLE_L2:        L2,
+    CASE_TITLE_L1:        fs(L1),
+    CASE_TITLE_L2:        fs(L2),
     APPLICATION:          app,
     MARKET_VALUE:         market,
     DOC_NUMBER:           '203-0041-000 Rev. A  '+today,
-    COMPANY_DESC:         coDesc,
-    CHALLENGE_BODY:       chalBody,
-    CHALLENGE_PAIN_INTRO: chalIntro,
-    CHALLENGE_BULLETS:    chalBullets,
-    CHALLENGE_QUOTE:      chalQuote,
-    SOLUTION_P1:          solP1,
-    SOLUTION_P2:          `The <b>TankScan</b> AIP system automatically sends text and email alerts when levels drop below a preset threshold — giving ${company} the visibility needed to schedule proactive, just-in-time deliveries and eliminate emergency runs.`,
-    SOLUTION_P3:          solP3,
-    RESULTS_INTRO:        resultsIntro,
-    RESULTS_BULLETS:      resBullets,
-    RESULTS_QUOTE:        resQuote,
+    COMPANY_DESC:         fs(coDesc),
+    CHALLENGE_BODY:       fs(chalBody),
+    CHALLENGE_PAIN_INTRO: fs(chalIntro),
+    CHALLENGE_BULLETS:    chalBullets.map(fs),
+    CHALLENGE_QUOTE:      fs(chalQuote),
+    SOLUTION_P1:          solP1,   // HTML — fixSpaces skipped to preserve <b> tags
+    SOLUTION_P2:          solP2,   // HTML — fixSpaces skipped to preserve <b> tags
+    SOLUTION_P3:          solP3IsQuote ? fs(solP3) : fs(solP3),
+    SOLUTION_P3_IS_QUOTE: solP3IsQuote,
+    RESULTS_INTRO:        fs(resultsIntro),
+    RESULTS_BULLETS:      resBullets.map(fs),
+    RESULTS_QUOTE:        fs(resQuote),
   };
 }
 
@@ -4877,6 +5011,8 @@ async function runAiAgent() {
   // ── STEP 1: Fetch website text (if URL provided) ─────────────────────────
   _aiStepState('astep-fetch', 'active');
   let webText = '';
+  let _ogImageUrl  = '';   // og:image — brand/logo mark, used as logo slot fallback
+  let _heroPhotoUrl = '';  // first content photo found — used for hero + background slots
   if (url) {
     const proxies = [
       'https://corsproxy.io/?' + encodeURIComponent(url),
@@ -4889,6 +5025,26 @@ async function runAiAgent() {
           let raw = await r.text();
           if (proxy.includes('allorigins')) { try { raw = JSON.parse(raw).contents||''; } catch(e){} }
           if (raw.length > 200) {
+            // 1. Extract og:image (brand/identity image — becomes logo slot fallback)
+            const _ogM = raw.match(/property=["']og:image["'][^>]*content=["']([^"']+)["']|content=["']([^"']+)["'][^>]*property=["']og:image["']/i)
+                      || raw.match(/property=["']twitter:image["'][^>]*content=["']([^"']+)["']|content=["']([^"']+)["'][^>]*property=["']twitter:image["']/i);
+            const _rawOg = _ogM ? (_ogM[1] || _ogM[2] || '').trim() : '';
+            if (_rawOg) { try { _ogImageUrl = new URL(_rawOg, url).href; } catch(e) { _ogImageUrl = _rawOg; } }
+
+            // 2. Find first large content photo (hero/background): src has photo-like path,
+            //    NOT a logo/icon/nav element, and looks like a real photo URL
+            const _logoRx = /logo|icon|badge|favicon|emblem|seal|crest|avatar|sprite|arrow|btn|button/i;
+            const _photoRx = /hero|banner|photo|image|img|bg|background|cover|slide|carousel|main|feature|article/i;
+            const _imgRx = /<img[^>]+src=["']([^"']+\.(?:jpg|jpeg|png|webp)(?:\?[^"']*)?)["'][^>]*/gi;
+            let _imgMatch;
+            while ((_imgMatch = _imgRx.exec(raw)) !== null) {
+              const _src = _imgMatch[1];
+              if (_logoRx.test(_src)) continue;            // skip obvious logos/icons
+              if (!_photoRx.test(_src) && _src.length < 30) continue;  // skip short generic names
+              try { _heroPhotoUrl = new URL(_src, url).href; } catch(e) { _heroPhotoUrl = _src; }
+              break;
+            }
+
             webText = raw.replace(/<style[\s\S]*?<\/style>/gi,'')
                          .replace(/<script[\s\S]*?<\/script>/gi,'')
                          .replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,4000);
@@ -4934,17 +5090,92 @@ async function runAiAgent() {
   if (parsed.CHALLENGE_QUOTE)           _aiSetField('chal-quote', parsed.CHALLENGE_QUOTE,  false);
   if (parsed.SOLUTION_P1)               _aiSetField('sol-p1',     parsed.SOLUTION_P1,      true);
   if (parsed.SOLUTION_P2)               _aiSetField('sol-p2',     parsed.SOLUTION_P2,      true);
-  if (parsed.SOLUTION_P3)               _aiSetField('sol-p3',     parsed.SOLUTION_P3,      false);
+  if (parsed.SOLUTION_P3) {
+    _aiSetField('sol-p3', parsed.SOLUTION_P3, false);
+    const _sp3 = document.getElementById('sol-p3');
+    if (_sp3) _sp3.classList.toggle('is-quote', !!parsed.SOLUTION_P3_IS_QUOTE);
+  }
   if (parsed.RESULTS_INTRO)             _aiSetField('res-intro',  parsed.RESULTS_INTRO,    false);
   if (parsed.RESULTS_QUOTE)             _aiSetField('res-quote',  parsed.RESULTS_QUOTE,    false);
   if (parsed.CHALLENGE_BULLETS?.length) _aiSetBullets('cb', 'CHALLENGE_BULLETS', parsed.CHALLENGE_BULLETS);
   if (parsed.RESULTS_BULLETS?.length)   _aiSetBullets('rb', 'RESULTS_BULLETS',   parsed.RESULTS_BULLETS);
   _aiStepState('astep-fill', 'done');
 
+  // ── Auto-fill images ──────────────────────────────────────────────────────
+  // Helper: returns true if the img element is still showing a placeholder
+  // (i.e. the user has NOT manually supplied their own image yet)
+  function _isPlaceholder(imgEl) {
+    if (!imgEl) return true;
+    const s = imgEl.src || '';
+    // Placeholder SVGs are data URIs; empty src resolves to the page URL itself
+    return !s || s === window.location.href || s.startsWith('data:image/svg');
+  }
+  function _flashImg(imgEl) {
+    imgEl.classList.add('ai-flash');
+    setTimeout(()=>imgEl.classList.remove('ai-flash'), 1600);
+  }
+
+  // 1. Product photo — only if the slot still has the placeholder
+  (function() {
+    const _ti = document.getElementById('trifecta-img');
+    if (_ti && _isPlaceholder(_ti)) {
+      _ti.src = 'https://tankscan.com/uploads/images/product-hero-2.jpg';
+      _flashImg(_ti);
+    }
+  })();
+  // 2. Hero + page-1 background — only if slots are still placeholders
+  if (_heroPhotoUrl) {
+    const _hi = document.getElementById('hero-img');
+    if (_hi && _isPlaceholder(_hi)) {
+      _hi.src = _heroPhotoUrl;
+      _hi.style.objectFit = 'cover';
+      _flashImg(_hi);
+    }
+    const _bg = document.getElementById('hero-lower-img');
+    if (_bg && _isPlaceholder(_bg)) {
+      _bg.src = _heroPhotoUrl;
+      _flashImg(_bg);
+    }
+  }
+  // 3. Company logo — Clearbit primary; fall back to og:image; skip if user already set one
+  if (url) {
+    try {
+      const _domain = new URL(url).hostname.replace(/^www\./,'');
+      const _logoUrl = 'https://logo.clearbit.com/' + _domain;
+      const _li = document.getElementById('logo-img');
+      if (_li && _isPlaceholder(_li)) {
+        _li.onerror = () => {
+          _li.onerror = null;
+          if (_ogImageUrl) { _li.src = _ogImageUrl; _flashImg(_li); }
+        };
+        _li.onload = () => { _flashImg(_li); };
+        _li.src = _logoUrl;
+      }
+    } catch(e) {}
+  }
+
   _aiSetStatus('✓ Done! Editor filled. Closing…', 'ok');
   document.getElementById('btn-run-agent').disabled = false;
   setTimeout(() => { closeAiModal(); }, 1800);
 }
+// ── On load: stamp today's date into the footer doc-number ───────────────────
+(function() {
+  const _prefix = '203-0041-000 Rev. A  ';
+  const _today  = new Date().toLocaleDateString('en-US',{year:'numeric',month:'numeric',day:'numeric'});
+  const _dateStr = _prefix + _today;
+  // Update the visible page-2 footer element
+  // Fire if empty OR already starts with our prefix (never overwrite a user-customised number)
+  const _dn = document.querySelector('[data-field="DOC_NUMBER"]');
+  if (_dn) {
+    const _cur = _dn.textContent.trim();
+    if (!_cur || _cur.startsWith(_prefix)) _dn.textContent = _dateStr;
+  }
+  // Keep the meta-panel input in sync
+  const _mn = document.getElementById('meta-docnum');
+  if (_mn) {
+    if (!_mn.value || _mn.value.startsWith(_prefix)) _mn.value = _dateStr;
+  }
+})();
 </script>
 </body>
 </html>
