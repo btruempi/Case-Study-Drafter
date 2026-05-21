@@ -629,8 +629,8 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
   <!-- HOME group -->
   <div class="tb-group">
     <div class="tb-group-btns">
-      <button id="btn-undo" class="tb-btn" onclick="undo()" disabled title="Undo (Ctrl+Z ⌘Z)">↩ Undo</button>
-      <button id="btn-redo" class="tb-btn" onclick="redo()" disabled title="Redo (Ctrl+Shift+Z ⌘⇧Z)">↪ Redo</button>
+      <button id="btn-undo" class="tb-btn" onclick="undo()" disabled title="Undo (Ctrl+Z)">↩ Undo</button>
+      <button id="btn-redo" class="tb-btn" onclick="redo()" disabled title="Redo (Ctrl+Shift+Z)">↪ Redo</button>
     </div>
     <div class="tb-group-lbl">HOME</div>
   </div>
@@ -853,7 +853,7 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
       ↔ <strong>Drag</strong> any of the 8 border handles to resize. For images, drag the centre area to move.<br><br>
       ↩ <strong>Ctrl+Z</strong> to undo · <strong>Ctrl+Shift+Z</strong> to redo.<br><br>
       🗑 <strong>Delete</strong> key removes selected element.<br><br>
-      🖱 <strong>Ctrl/⌘+Click</strong> multiple elements to select them all, then drag any one to move them together.
+      🖱 <strong>Ctrl+Click</strong> multiple elements to select them all, then drag any one to move them together.
     </div>
 
     <!-- TEXT EDITING -->
@@ -4449,9 +4449,25 @@ async function _readOneFile(file) {
     const dataUrl = await new Promise((res,rej) => {
       const fr=new FileReader(); fr.onload=()=>res(fr.result); fr.onerror=()=>rej(new Error('FileReader failed')); fr.readAsDataURL(file);
     });
-    const worker = await Tesseract.createWorker('eng');
-    const { data:{ text:ocrText } } = await worker.recognize(dataUrl);
-    await worker.terminate();
+    // Route the image to the correct case study slot based on filename keywords,
+    // then stamp it as user-set so the URL auto-fill will NOT overwrite it.
+    (function() {
+      const fname = file.name.toLowerCase();
+      let slot;
+      if (/logo|brand|mark|emblem|crest/.test(fname))                      slot = 'LOGO_IMAGE';
+      else if (/trifecta|product|tank|device|sensor/.test(fname))          slot = 'TRIFECTA_IMAGE';
+      else if (/bg|background|back.?ground/.test(fname))                   slot = 'P1_BG_IMAGE';
+      else                                                                   slot = 'HERO_IMAGE';
+      applyImage(slot, dataUrl);  // places image AND stamps data-user-set="1"
+    })();
+    // Also OCR the image in case it's a photo of handwritten notes
+    let ocrText = '';
+    try {
+      const worker = await Tesseract.createWorker('eng');
+      const result = await worker.recognize(dataUrl);
+      ocrText = result.data.text || '';
+      await worker.terminate();
+    } catch(e) { /* OCR unavailable — image was still placed in the correct slot above */ }
     return { text: ocrText, type:'image', icon:'🖼️', label:file.name };
   } else {
     return { text: await file.text(), type:'text', icon:'📄', label:file.name };
@@ -5015,39 +5031,59 @@ async function runAiAgent() {
   // ── STEP 1: Fetch website text (if URL provided) ─────────────────────────
   _aiStepState('astep-fetch', 'active');
   let webText = '';
-  let _ogImageUrl  = '';   // og:image — brand/logo mark, used as logo slot fallback
-  let _heroPhotoUrl = '';  // first content photo found — used for hero + background slots
+  let _ogImageUrl  = '';   // og:image — company's curated social-share photo (hero primary)
+  let _photos      = [];   // up to 5 content photos from img tags (hero/background candidates)
+  let _siteFavicon = '';   // favicon from <link> tags (logo last-resort fallback)
   if (url) {
     const proxies = [
       'https://corsproxy.io/?' + encodeURIComponent(url),
       'https://api.allorigins.win/get?url=' + encodeURIComponent(url),
     ];
     for (const proxy of proxies) {
+      const _ac = new AbortController();
+      const _tid = setTimeout(() => _ac.abort(), 8000);
       try {
-        const r = await fetch(proxy, { signal: AbortSignal.timeout(8000) });
+        const r = await fetch(proxy, { signal: _ac.signal });
+        clearTimeout(_tid);
         if (r.ok) {
           let raw = await r.text();
           if (proxy.includes('allorigins')) { try { raw = JSON.parse(raw).contents||''; } catch(e){} }
           if (raw.length > 200) {
-            // 1. Extract og:image (brand/identity image — becomes logo slot fallback)
+            // 1. Extract og:image (best for hero — curated single image designed for sharing)
             const _ogM = raw.match(/property=["']og:image["'][^>]*content=["']([^"']+)["']|content=["']([^"']+)["'][^>]*property=["']og:image["']/i)
                       || raw.match(/property=["']twitter:image["'][^>]*content=["']([^"']+)["']|content=["']([^"']+)["'][^>]*property=["']twitter:image["']/i);
             const _rawOg = _ogM ? (_ogM[1] || _ogM[2] || '').trim() : '';
             if (_rawOg) { try { _ogImageUrl = new URL(_rawOg, url).href; } catch(e) { _ogImageUrl = _rawOg; } }
 
-            // 2. Find first large content photo (hero/background): src has photo-like path,
-            //    NOT a logo/icon/nav element, and looks like a real photo URL
-            const _logoRx = /logo|icon|badge|favicon|emblem|seal|crest|avatar|sprite|arrow|btn|button/i;
-            const _photoRx = /hero|banner|photo|image|img|bg|background|cover|slide|carousel|main|feature|article/i;
-            const _imgRx = /<img[^>]+src=["']([^"']+\.(?:jpg|jpeg|png|webp)(?:\?[^"']*)?)["'][^>]*/gi;
-            let _imgMatch;
-            while ((_imgMatch = _imgRx.exec(raw)) !== null) {
-              const _src = _imgMatch[1];
-              if (_logoRx.test(_src)) continue;            // skip obvious logos/icons
-              if (!_photoRx.test(_src) && _src.length < 30) continue;  // skip short generic names
-              try { _heroPhotoUrl = new URL(_src, url).href; } catch(e) { _heroPhotoUrl = _src; }
-              break;
-            }
+            // 2. Extract site favicon from <link> tags (logo slot last-resort fallback)
+            const _favM = raw.match(/<link[^>]+rel=["']apple-touch-icon(?:-precomposed)?["'][^>]+href=["']([^"']+)["']/i)
+                       || raw.match(/<link[^>]+href=["']([^"']+)["'][^>]+rel=["']apple-touch-icon(?:-precomposed)?["']/i)
+                       || raw.match(/<link[^>]+rel=["'](?:shortcut\s+)?icon["'][^>]+href=["']([^"']+\.(?:png|ico|svg|webp|jpg)[^"']*)["']/i)
+                       || raw.match(/<link[^>]+href=["']([^"']+\.(?:png|ico|svg|webp|jpg)[^"']*)["'][^>]+rel=["'](?:shortcut\s+)?icon["']/i);
+            if (_favM && _favM[1]) { try { _siteFavicon = new URL(_favM[1], url).href; } catch(e) { _siteFavicon = _favM[1]; } }
+
+            // 3. Collect up to 5 distinct content photos
+            //    Two-pass approach (no lookbehind) — works on all Windows browsers
+            const _logoRx  = /logo|icon|badge|favicon|emblem|seal|crest|avatar|sprite|arrow|btn|button/i;
+            const _photoRx = /hero|banner|photo|image|img|bg|background|cover|slide|carousel|main|feature|article|upload|media|content/i;
+            const _addPhoto = src => {
+              if (_photos.length >= 5) return;
+              if (_logoRx.test(src)) return;
+              if (!_photoRx.test(src) && src.length < 40) return;
+              try {
+                const abs = new URL(src, url).href;
+                if (!_photos.includes(abs)) _photos.push(abs);
+              } catch(e) {
+                if (!_photos.includes(src)) _photos.push(src);
+              }
+            };
+            // Pass 1: eager-loaded src attributes in <img> tags
+            const _imgSrcRx = /<img[^>]+src=["']([^"']+\.(?:jpg|jpeg|png|webp)(?:\?[^"']*)?)["']/gi;
+            // Pass 2: lazy-loaded data-src / data-lazy-src / data-original-src attributes
+            const _imgDatRx = /data-(?:lazy-|original-)?src=["']([^"']+\.(?:jpg|jpeg|png|webp)(?:\?[^"']*)?)["']/gi;
+            let _imgM2;
+            while ((_imgM2 = _imgSrcRx.exec(raw)) !== null) _addPhoto(_imgM2[1]);
+            while ((_imgM2 = _imgDatRx.exec(raw)) !== null) _addPhoto(_imgM2[1]);
 
             webText = raw.replace(/<style[\s\S]*?<\/style>/gi,'')
                          .replace(/<script[\s\S]*?<\/script>/gi,'')
@@ -5055,7 +5091,7 @@ async function runAiAgent() {
             break;
           }
         }
-      } catch(e) {}
+      } catch(e) { clearTimeout(_tid); }
     }
   }
   _aiStepState('astep-fetch', 'done');
@@ -5111,46 +5147,57 @@ async function runAiAgent() {
   function _userSet(imgEl) { return imgEl && imgEl.dataset.userSet === '1'; }
   function _flashImg(imgEl) { imgEl.classList.add('ai-flash'); setTimeout(()=>imgEl.classList.remove('ai-flash'),1600); }
 
-  // 1. Trifecta: always use the TankScan product photo (canonical product image)
+  // Route images to the correct slots:
+  //   Hero    → og:image (curated social-share photo); if og:image looks logo-like, use _photos[0]
+  //   Bg      → first _photos[] entry that is different from the hero source
+  //   Logo    → Clearbit → Google Favicon → og:image → site favicon (progressive fallback chain)
+  //   Trifecta→ TankScan product photo (hardcoded — always brand-relevant)
+  const _ogIsLogoLike = _ogImageUrl && /logo|brand|icon|mark|seal|emblem|badge/i.test(_ogImageUrl);
+  const _heroSrc = (_ogImageUrl && !_ogIsLogoLike) ? _ogImageUrl : (_photos[0] || '');
+  const _bgSrc   = _photos.find(p => p !== _heroSrc) || (_heroSrc !== _photos[0] ? _photos[0] : '');
+
+  // 1. Trifecta: TankScan product photo — canonical, always brand-relevant
   (function() {
     const _ti = document.getElementById('trifecta-img');
-    if (_ti && !_userSet(_ti)) {
-      _ti.src = 'https://tankscan.com/uploads/images/product-hero-2.jpg';
-      _flashImg(_ti);
-    }
+    if (_ti && !_userSet(_ti)) { _ti.src = 'https://tankscan.com/uploads/images/product-hero-2.jpg'; _flashImg(_ti); }
   })();
 
-  // 2. Hero image → og:image (curated social-share image = single clean photo)
-  //    Fallback to first content photo if og:image not available
+  // 2. Hero image: og:image preferred (single curated photo); first content photo as fallback
   (function() {
+    if (!_heroSrc) return;
     const _hi = document.getElementById('hero-img');
-    if (!_hi || _userSet(_hi)) return;
-    const _heroSrc = _ogImageUrl || _heroPhotoUrl;
-    if (_heroSrc) { _hi.src = _heroSrc; _hi.style.objectFit = 'cover'; _flashImg(_hi); }
+    if (_hi && !_userSet(_hi)) { _hi.src = _heroSrc; _hi.style.objectFit = 'cover'; _flashImg(_hi); }
   })();
 
-  // 3. Page-1 background → first content photo found on site (different from og:image)
-  //    Gives a real-world scene from the customer's world; if none found, leave placeholder
+  // 3. Page-1 background: first content photo that is different from the hero source
   (function() {
+    if (!_bgSrc) return;
     const _bg = document.getElementById('hero-lower-img');
-    if (!_bg || _userSet(_bg)) return;
-    if (_heroPhotoUrl) { _bg.src = _heroPhotoUrl; _flashImg(_bg); }
+    if (_bg && !_userSet(_bg)) { _bg.src = _bgSrc; _flashImg(_bg); }
   })();
 
-  // 4. Logo → Clearbit primary (best quality); og:image fallback if Clearbit 404s
-  //    Skip if human already uploaded their own logo
+  // 4. Logo: Clearbit → Google Favicon → og:image → site favicon (skip if human uploaded)
   if (url) {
     try {
       const _domain = new URL(url).hostname.replace(/^www\./,'');
       const _li = document.getElementById('logo-img');
       if (_li && !_userSet(_li)) {
-        const _logoUrl = 'https://logo.clearbit.com/' + _domain;
-        _li.onerror = () => {
-          _li.onerror = null;
-          if (_ogImageUrl) { _li.src = _ogImageUrl; _flashImg(_li); }
+        // Final fallback: og:image or site favicon from <link> tags
+        const _fallbackFinal = () => {
+          _li.onerror = null; _li.onload = null;
+          const _last = _ogImageUrl || _siteFavicon;
+          if (_last) { _li.src = _last; _li.onload = () => _flashImg(_li); }
         };
-        _li.onload = () => { _flashImg(_li); };
-        _li.src = _logoUrl;
+        // Second fallback: Google's favicon service (sz=128 for higher quality)
+        const _fallbackGoogle = () => {
+          _li.onerror = _fallbackFinal;
+          _li.onload = () => _flashImg(_li);
+          _li.src = 'https://www.google.com/s2/favicons?domain=' + _domain + '&sz=128';
+        };
+        // Primary: Clearbit logo API
+        _li.onerror = _fallbackGoogle;
+        _li.onload = () => _flashImg(_li);
+        _li.src = 'https://logo.clearbit.com/' + _domain;
       }
     } catch(e) {}
   }
