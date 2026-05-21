@@ -265,10 +265,10 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
 #trifecta-slot{float:right;position:relative;width:215px;height:140px;
   margin:0 0 8px 12px;clear:right;}
 #trifecta-slot img{object-fit:contain;width:100%;height:100%;display:block;}
-.p2-res{position:absolute;top:334px;left:26px;right:26px;background:white;
+.p2-res{position:absolute;top:400px;left:26px;right:26px;background:white;
   border:0.5px solid #CCCCCC;border-radius:8px;
   clip-path:polygon(0 0,calc(100% - 18px) 0,100% 34px,100% 100%,0 100%);
-  padding:14px;min-height:300px;}
+  padding:14px;min-height:258px;}
 .p2-res-intro{font-size:12px;color:#3D3D3D;line-height:18px;margin-bottom:4px;}
 .p2-res-quote{font-size:14px;color:#3A9DD1;font-style:italic;
   line-height:21px;margin-top:10px;}
@@ -3350,13 +3350,17 @@ function applyImage(key, uri) {
   }
   images[key] = uri;
   if (key === 'HERO_IMAGE') {
-    document.getElementById('hero-img').src = uri;
+    const _el = document.getElementById('hero-img');
+    _el.src = uri; _el.dataset.userSet = '1';
   } else if (key === 'P1_BG_IMAGE') {
-    document.getElementById('hero-lower-img').src = uri;
+    const _el = document.getElementById('hero-lower-img');
+    _el.src = uri; _el.dataset.userSet = '1';
   } else if (key === 'TRIFECTA_IMAGE') {
-    document.getElementById('trifecta-img').src = uri;
+    const _el = document.getElementById('trifecta-img');
+    _el.src = uri; _el.dataset.userSet = '1';
   } else if (key === 'LOGO_IMAGE') {
-    document.getElementById('logo-img').src = uri;
+    const _el = document.getElementById('logo-img');
+    _el.src = uri; _el.dataset.userSet = '1';
   } else if (key === 'AQ_LOGO_IMAGE') {
     document.getElementById('aq-logo-img').src = uri;
   } else {
@@ -5102,48 +5106,45 @@ async function runAiAgent() {
   _aiStepState('astep-fill', 'done');
 
   // ── Auto-fill images ──────────────────────────────────────────────────────
-  // Helper: returns true if the img element is still showing a placeholder
-  // (i.e. the user has NOT manually supplied their own image yet)
-  function _isPlaceholder(imgEl) {
-    if (!imgEl) return true;
-    const s = imgEl.src || '';
-    // Placeholder SVGs are data URIs; empty src resolves to the page URL itself
-    return !s || s === window.location.href || s.startsWith('data:image/svg');
-  }
-  function _flashImg(imgEl) {
-    imgEl.classList.add('ai-flash');
-    setTimeout(()=>imgEl.classList.remove('ai-flash'), 1600);
-  }
+  // Helper: true when the human manually uploaded/dropped this image → auto-fill must not overwrite it
+  // Set by applyImage() via data-user-set="1"; auto-filled images never get this flag.
+  function _userSet(imgEl) { return imgEl && imgEl.dataset.userSet === '1'; }
+  function _flashImg(imgEl) { imgEl.classList.add('ai-flash'); setTimeout(()=>imgEl.classList.remove('ai-flash'),1600); }
 
-  // 1. Product photo — only if the slot still has the placeholder
+  // 1. Trifecta: always use the TankScan product photo (canonical product image)
   (function() {
     const _ti = document.getElementById('trifecta-img');
-    if (_ti && _isPlaceholder(_ti)) {
+    if (_ti && !_userSet(_ti)) {
       _ti.src = 'https://tankscan.com/uploads/images/product-hero-2.jpg';
       _flashImg(_ti);
     }
   })();
-  // 2. Hero + page-1 background — only if slots are still placeholders
-  if (_heroPhotoUrl) {
+
+  // 2. Hero image → og:image (curated social-share image = single clean photo)
+  //    Fallback to first content photo if og:image not available
+  (function() {
     const _hi = document.getElementById('hero-img');
-    if (_hi && _isPlaceholder(_hi)) {
-      _hi.src = _heroPhotoUrl;
-      _hi.style.objectFit = 'cover';
-      _flashImg(_hi);
-    }
+    if (!_hi || _userSet(_hi)) return;
+    const _heroSrc = _ogImageUrl || _heroPhotoUrl;
+    if (_heroSrc) { _hi.src = _heroSrc; _hi.style.objectFit = 'cover'; _flashImg(_hi); }
+  })();
+
+  // 3. Page-1 background → first content photo found on site (different from og:image)
+  //    Gives a real-world scene from the customer's world; if none found, leave placeholder
+  (function() {
     const _bg = document.getElementById('hero-lower-img');
-    if (_bg && _isPlaceholder(_bg)) {
-      _bg.src = _heroPhotoUrl;
-      _flashImg(_bg);
-    }
-  }
-  // 3. Company logo — Clearbit primary; fall back to og:image; skip if user already set one
+    if (!_bg || _userSet(_bg)) return;
+    if (_heroPhotoUrl) { _bg.src = _heroPhotoUrl; _flashImg(_bg); }
+  })();
+
+  // 4. Logo → Clearbit primary (best quality); og:image fallback if Clearbit 404s
+  //    Skip if human already uploaded their own logo
   if (url) {
     try {
       const _domain = new URL(url).hostname.replace(/^www\./,'');
-      const _logoUrl = 'https://logo.clearbit.com/' + _domain;
       const _li = document.getElementById('logo-img');
-      if (_li && _isPlaceholder(_li)) {
+      if (_li && !_userSet(_li)) {
+        const _logoUrl = 'https://logo.clearbit.com/' + _domain;
         _li.onerror = () => {
           _li.onerror = null;
           if (_ogImageUrl) { _li.src = _ogImageUrl; _flashImg(_li); }
