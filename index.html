@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Case Study Editor – TankScan</title>
+<title>Case Study Editor – AquaPhoenix Scientific</title>
 <!-- mammoth.js: converts .docx → plain text in the browser, no server needed -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 <!-- pdf.js: extracts text from PDFs client-side, no server or worker needed -->
@@ -175,27 +175,21 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
 .img-slot.drag-over{outline:3px dashed #3A9DD1;outline-offset:-3px;}
 
 /* ═══ BULLET LISTS ════════════════════════════════════════════════════════ */
-.blist{} .brow{display:flex;align-items:flex-start;gap:4px;margin:2px 0;}
-.bsym{color:#3D3D3D;font-size:12px;flex-shrink:0;margin-top:2px;line-height:18px;}
-.btxt{font-size:12px;color:#3D3D3D;line-height:18px;flex:1;min-width:20px;}
-.bdel{opacity:1;background:none;border:none;color:#ef4444;cursor:pointer;
-  font-size:10px;padding:0 4px;flex-shrink:0;line-height:15px;
-  font-family:inherit;position:relative;z-index:510;pointer-events:all;}
-/* .badd removed — bullets added by pressing Enter inside a bullet text field */
+/* blist-tb is defined near .p2-sol-p3 above — single contenteditable div, one child per bullet */
 
 /* ═══ SHARED HEADER ═══════════════════════════════════════════════════════ */
 .hdr{position:absolute;top:0;left:0;right:0;height:50px;background:white;
   overflow:hidden;z-index:20;}
 .hdr-teal{position:absolute;inset:0;background:#3A9DD1;
   clip-path:polygon(0 0, 58.8% 0, 63.2% 100%, 0 100%);pointer-events:none;}
-.hdr-cs{position:absolute;top:17px;left:37px;color:white;font-size:18px;
-  font-family:'Helvetica Neue',Arial,sans-serif;font-weight:300;letter-spacing:0.03em;cursor:move;z-index:21;min-width:60px;}
+.hdr-cs{position:absolute;top:21px;left:37px;color:white;font-size:15px;
+  font-family:'Helvetica Neue',Arial,sans-serif;font-weight:400;cursor:move;z-index:21;min-width:60px;}
 .hdr-logo{position:absolute;top:11px;right:27px;display:flex;align-items:baseline;gap:0;}
 .hdr-logo .tk{color:#9D9D9D;font-size:27px;font-weight:700;}
 .hdr-logo .sc{color:#3A9DD1;font-size:27px;font-weight:700;}
-.hdr-logo .hdiv{width:1px;height:22px;background:#bbb;margin:0 6px;
+.hdr-logo .hdiv{width:1px;height:24px;background:#BBBBBB;margin:0 7px;
   align-self:flex-end;margin-bottom:3px;}
-.hdr-logo .pb{display:flex;flex-direction:column;font-size:8px;color:#555;
+.hdr-logo .pb{display:flex;flex-direction:column;font-size:8.5px;color:#555555;
   align-self:flex-end;margin-bottom:3px;}
 
 /* ═══ PAGE 1 ══════════════════════════════════════════════════════════════ */
@@ -208,23 +202,23 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
   pointer-events:none;}
 .p1-diag{position:absolute;top:0;left:0;width:100%;height:100%;
   pointer-events:none;overflow:visible;}
-.p1-tl1{position:absolute;top:65px;left:38px;right:232px;
+.p1-tl1{position:absolute;top:72px;left:38px;right:232px;
   font-size:21px;color:#555558;font-weight:normal;line-height:1.25;}
 #logo-slot{position:absolute;top:115px;left:38px;width:180px;height:60px;}
 #logo-slot img{object-fit:contain;object-position:left center;}
 .p1-desc{position:absolute;top:195px;left:38px;width:245px;
-  font-size:12px;color:#3D3D3D;line-height:18px;}
+  font-size:10px;color:#3D3D3D;line-height:15px;}
 /* Application/Market — stacked label+value pairs; value indented under label */
 /* Application/Market labels follow the diagonal cut angle.
    Diagonal: x = 386 + (y-50)*0.6  — each row shifts right as it goes down. */
-#app-lbl{position:absolute;top:107px;left:450px;font-size:13px;
+#app-lbl{position:absolute;top:118px;left:451px;font-size:12px;
   font-weight:bold;color:#222222;white-space:nowrap;min-width:60px;min-height:14px;}
-#app-val{position:absolute;top:122px;left:459px;font-size:13px;
+#app-val{position:absolute;top:131px;left:464px;font-size:12px;
   color:#3D3D3D;white-space:normal;min-width:60px;max-width:135px;
   min-height:14px;line-height:1.35;}
-#mkt-lbl{position:absolute;top:157px;left:475px;font-size:13px;
+#mkt-lbl{position:absolute;top:162px;left:480px;font-size:12px;
   font-weight:bold;color:#222222;white-space:nowrap;min-width:60px;min-height:14px;}
-#mkt-val{position:absolute;top:172px;left:484px;font-size:13px;
+#mkt-val{position:absolute;top:177px;left:492px;font-size:12px;
   color:#3D3D3D;white-space:normal;min-width:60px;max-width:120px;
   min-height:14px;line-height:1.35;}
 .p1-sep{position:absolute;top:330px;left:0;right:0;height:5px;
@@ -236,11 +230,11 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
   border:0.5px solid #CCCCCC;border-radius:8px;
   clip-path:polygon(0 0,calc(100% - 18px) 0,100% 34px,100% 100%,0 100%);
   padding:14px 14px 10px;min-height:200px;z-index:5;}
-.box-hd{font-size:14px;font-weight:bold;color:#222222;margin-bottom:6px;}
-.p1-ch-body{font-size:12px;color:#3D3D3D;line-height:18px;margin-bottom:4px;}
-.p1-ch-intro{font-size:12px;color:#3D3D3D;line-height:18px;margin-bottom:3px;}
-.p1-ch-quote{font-size:14px;color:#3A9DD1;font-style:italic;
-  line-height:21px;margin-top:8px;}
+.box-hd{font-size:11px;font-weight:bold;color:#222222;margin-bottom:6px;}
+.p1-ch-body{font-size:10px;color:#3D3D3D;line-height:15px;margin-bottom:4px;}
+.p1-ch-intro{font-size:10px;color:#3D3D3D;line-height:15px;margin-bottom:3px;}
+.p1-ch-quote{font-size:13px;color:#3A9DD1;font-style:italic;
+  line-height:19px;margin-top:8px;}
 .p1-footer{position:absolute;bottom:0;left:0;width:233px;height:47px;
   background:#3A9DD1;clip-path:polygon(0 0,89.3% 0,100% 100%,0 100%);
   display:flex;align-items:center;padding-left:16px;overflow:hidden;z-index:10;}
@@ -252,42 +246,46 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
   border:0.5px solid #CCCCCC;border-radius:8px;
   clip-path:polygon(0 0,calc(100% - 18px) 0,100% 34px,100% 100%,0 100%);
   padding:14px;min-height:260px;overflow:auto;}
-.p2-sol-p1{font-size:12px;color:#3D3D3D;line-height:18px;margin-bottom:8px;}
+.p2-sol-p1{font-size:10px;color:#3D3D3D;line-height:15px;margin-bottom:8px;}
 /* sol-p2: identical style to sol-p1; hidden via CSS when empty so no grey ghost appears */
-.p2-sol-p2{font-size:12px;color:#3D3D3D;line-height:18px;margin-bottom:8px;}
+.p2-sol-p2{font-size:10px;color:#3D3D3D;line-height:15px;margin-bottom:8px;}
 .p2-sol-p2:empty{display:none;}
-.p2-sol-p3{font-size:12px;color:#3D3D3D;line-height:18px;margin-bottom:8px;}
+.p2-sol-p3{font-size:10px;color:#3D3D3D;line-height:15px;margin-bottom:8px;}
 .p2-sol-p3:empty{display:none;}
-.p2-sol-p3.is-quote{font-size:14px;color:#3A9DD1;font-style:italic;line-height:21px;margin-top:8px;margin-bottom:0;}
+/* Single-div bullet text box — one child <div> per bullet point */
+.blist-tb{font-size:10px;color:#3D3D3D;line-height:15px;outline:none;cursor:text;}
+.blist-tb>div{margin:1px 0;}
+.blist-tb:focus{outline:1px dashed rgba(20,184,166,0.25);border-radius:2px;}
+.p2-sol-p3.is-quote{font-size:13px;color:#3A9DD1;font-style:italic;line-height:19px;margin-top:8px;margin-bottom:0;}
 /* trifecta-slot: floated right after sol-p2 so text above fills full width,
    and sol-p3 (quote) wraps to its left. Dragging converts to position:absolute. */
 .p2-sol::after{content:'';display:table;clear:both;}
 #trifecta-slot{float:right;position:relative;width:215px;height:140px;
   margin:0 0 8px 12px;clear:right;}
 #trifecta-slot img{object-fit:contain;width:100%;height:100%;display:block;}
-.p2-res{position:absolute;top:400px;left:26px;right:26px;background:white;
+.p2-res{position:absolute;top:334px;left:26px;right:26px;background:white;
   border:0.5px solid #CCCCCC;border-radius:8px;
   clip-path:polygon(0 0,calc(100% - 18px) 0,100% 34px,100% 100%,0 100%);
-  padding:14px;min-height:258px;}
-.p2-res-intro{font-size:12px;color:#3D3D3D;line-height:18px;margin-bottom:4px;}
-.p2-res-quote{font-size:14px;color:#3A9DD1;font-style:italic;
-  line-height:21px;margin-top:10px;}
+  padding:14px;min-height:308px;}
+.p2-res-intro{font-size:10px;color:#3D3D3D;line-height:15px;margin-bottom:4px;}
+.p2-res-quote{font-size:13px;color:#3A9DD1;font-style:italic;
+  line-height:19px;margin-top:10px;}
 .p2-footer-group{position:absolute;top:686px;left:0;right:0;height:107px;}
-.p2-docnum{position:absolute;top:0;left:36px;font-size:7px;
+.p2-docnum{position:absolute;top:0;left:36px;font-size:7.5px;
   font-weight:bold;color:#222222;font-family:Arial,sans-serif;white-space:pre;}
 .p2-ribbon{position:absolute;top:15px;left:0;width:387px;height:45px;
   background:#636363;clip-path:polygon(0 0,96.6% 0,100% 50%,96.6% 100%,0 100%);
   pointer-events:none;}
-.p2-ribbon-txt{position:absolute;top:15px;left:16px;color:white;font-size:8.5px;font-family:Arial,sans-serif;}
-.p2-ribbon-txt .rc{position:absolute;top:8px;left:5px;white-space:nowrap;font-size:9.5px;}
+.p2-ribbon-txt{position:absolute;top:15px;left:16px;color:white;font-size:8px;font-family:Arial,sans-serif;}
+.p2-ribbon-txt .rc{position:absolute;top:8px;left:5px;white-space:nowrap;font-size:8px;font-weight:bold;}
 .p2-ribbon-txt .r1{position:absolute;top:19px;left:5px;white-space:nowrap;}
 .p2-ribbon-txt .r2{position:absolute;top:29px;left:5px;white-space:nowrap;}
 .p2-ribbon-txt .rp{position:absolute;top:19px;left:128px;white-space:nowrap;}
-.p2-ribbon-txt .rd{position:absolute;top:12px;left:228px;white-space:nowrap;font-size:9.5px;}
-.p2-ribbon-txt .rw{position:absolute;top:24px;left:228px;white-space:nowrap;font-size:9.5px;}
+.p2-ribbon-txt .rd{position:absolute;top:12px;left:228px;white-space:nowrap;font-size:8px;}
+.p2-ribbon-txt .rw{position:absolute;top:24px;left:228px;white-space:nowrap;font-size:8px;}
 .p2-aq-logo{position:absolute;top:7px;left:419px;width:190px;height:61px;}
 .p2-copyright{position:absolute;top:64px;left:20px;right:210px;
-  font-size:6.5px;color:#888;line-height:7.5px;font-family:Arial,sans-serif;}
+  font-size:5.5px;color:#888888;line-height:7px;font-family:Arial,sans-serif;}
 
 /* ═══ DRAGGABLE ELEMENTS ══════════════════════════════════════════════════ */
 .draggable-el{user-select:none;}
@@ -485,6 +483,23 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
   border-radius:6px;cursor:pointer;font-size:14px;font-weight:700;font-family:inherit;}
 .modal-close:hover{background:#2a8ab8;}
 
+/* ═══ COLLAPSIBLE INNER TEXT ROWS ════════════════════════════════════════════
+   When an inner text section (quote, intro, body) is fully cleared, it gets
+   ._tb-hidden and collapses to nothing.  Hovering or selecting the parent box
+   reveals it as a thin dashed strip the user can click to re-enter text.     */
+._tb-hidden{display:none!important;}
+/* Reveal as a thin clickable strip when parent box is selected or hovered */
+.el-selected ._tb-hidden,
+.p1-chal:hover ._tb-hidden,
+.p2-sol:hover ._tb-hidden,
+.p2-res:hover ._tb-hidden{
+  display:block!important;
+  min-height:6px;max-height:6px;overflow:hidden;
+  margin:1px 0;padding:0;cursor:text;
+  outline:1px dashed rgba(58,157,209,.3);
+  border-radius:2px;
+}
+
 /* ═══ PRINT — fits exactly one 8.5 × 11 in sheet per page ══════════════════ */
 @media print{
   /* @page sets the physical paper size and removes all margins so the page
@@ -498,8 +513,10 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
   html{zoom:133.3333%;}
 
   body{background:white;margin:0;padding:0;}
-  #toolbar,#statusbar,#props,.bdel,.img-hover,.modal-bg,
+  #toolbar,#statusbar,#props,.img-hover,.modal-bg,
   #sel-overlay{display:none !important;}
+  /* Keep collapsed rows invisible in print — don't expand the strip */
+  ._tb-hidden{display:none!important;}
 
   /* Stack pages vertically with no gaps; strip all canvas chrome */
   #main{display:block;overflow:visible;}
@@ -729,16 +746,16 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
       <svg class="p1-diag" xmlns="http://www.w3.org/2000/svg">
         <line x1="386" y1="50" x2="554" y2="330" stroke="#A8D0E9" stroke-width="1"/>
       </svg>
-      <div class="p1-tl1 draggable-el" id="tl1" contenteditable="true" data-field="CASE_TITLE_L1" data-label="Headline" style="white-space:pre-wrap"></div>
+      <div class="p1-tl1 draggable-el" id="tl1" contenteditable="true" data-field="CASE_TITLE_L1" data-label="Headline" style="white-space:pre-wrap">Remote Jet Fuel Inventory Monitoring</div>
       <div class="img-slot draggable-el" id="logo-slot" data-img="LOGO_IMAGE" data-label="Company logo">
         <img id="logo-img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxODAiIGhlaWdodD0iNjAiPjxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iNjAiIGZpbGw9IndoaXRlIiByeD0iNCIgc3Ryb2tlPSIjYzhkNGUwIiBzdHJva2Utd2lkdGg9IjEuNSIgc3Ryb2tlLWRhc2hhcnJheT0iNSw0Ii8+PHRleHQgeD0iOTAiIHk9IjI1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjYjBiZWM4IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9ImJvbGQiPkNvbXBhbnkgTG9nbzwvdGV4dD48dGV4dCB4PSI5MCIgeT0iNDEiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNiMGJlYzgiIGZvbnQtZmFtaWx5PSJBcmlhbCxzYW5zLXNlcmlmIiBmb250LXNpemU9IjkiPkNsaWNrIMK3IGRyb3Agwrcgb3IgcmVwbGFjZSB2aWEgcGFuZWw8L3RleHQ+PC9zdmc+" alt="Logo" style="object-fit:contain;object-position:left center">
         <div class="img-hover"><div class="img-badge">🖱 Double-click to change</div></div>
       </div>
-      <div class="p1-desc draggable-el" id="desc-box" contenteditable="true" data-field="COMPANY_DESC" data-label="Company description"></div>
+      <div class="p1-desc draggable-el" id="desc-box" contenteditable="true" data-field="COMPANY_DESC" data-label="Company description">AquaPhoenix Scientific is a fixed-base operator located in Hanover, PA.</div>
       <div class="draggable-el" id="app-lbl" contenteditable="true" data-field="APP_LABEL" data-label="Application label">Application:</div>
-      <div class="draggable-el" id="app-val" contenteditable="true" data-field="APPLICATION" data-label="Application value"></div>
+      <div class="draggable-el" id="app-val" contenteditable="true" data-field="APPLICATION" data-label="Application value">Fuel Inventory Mgmt.</div>
       <div class="draggable-el" id="mkt-lbl" contenteditable="true" data-field="MKT_LABEL" data-label="Market label">Market:</div>
-      <div class="draggable-el" id="mkt-val" contenteditable="true" data-field="MARKET_VALUE" data-label="Market value"></div>
+      <div class="draggable-el" id="mkt-val" contenteditable="true" data-field="MARKET_VALUE" data-label="Market value">Aviation</div>
       <div class="p1-sep"></div>
       <div class="img-slot draggable-el" id="hero-lower" data-img="P1_BG_IMAGE" data-label="Page 1 background image">
         <img id="hero-lower-img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MTIiIGhlaWdodD0iNDYwIj48cmVjdCB3aWR0aD0iNjEyIiBoZWlnaHQ9IjQ2MCIgZmlsbD0id2hpdGUiIHJ4PSI0IiBzdHJva2U9IiNjOGQ0ZTAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtZGFzaGFycmF5PSI1LDQiLz48dGV4dCB4PSIzMDYiIHk9IjIyNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2IwYmVjOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSJib2xkIj5QYWdlIDEgQmFja2dyb3VuZDwvdGV4dD48dGV4dCB4PSIzMDYiIHk9IjI0MSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2IwYmVjOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOSI+Q2xpY2sgwrcgZHJvcCDCtyBvciByZXBsYWNlIHZpYSBwYW5lbDwvdGV4dD48L3N2Zz4=" alt="" style="width:100%;height:100%;object-fit:cover;">
@@ -746,10 +763,10 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
       </div>
       <div class="p1-chal draggable-el" id="chal-box" data-label="Challenge box">
         <div class="box-hd" id="chal-hd" contenteditable="true" data-field="CHALLENGE_HEADING" data-label="Challenge heading">Challenge</div>
-        <div class="p1-ch-body" id="chal-body" contenteditable="true" data-field="CHALLENGE_BODY" data-label="Challenge body"></div>
-        <div class="p1-ch-intro" id="chal-intro" contenteditable="true" data-field="CHALLENGE_PAIN_INTRO" data-label="Challenge intro"></div>
-        <div class="blist" id="cb" data-field="CHALLENGE_BULLETS"></div>
-        <div class="p1-ch-quote" id="chal-quote" contenteditable="true" data-field="CHALLENGE_QUOTE" data-label="Challenge quote"></div>
+        <div class="p1-ch-body" id="chal-body" contenteditable="true" data-field="CHALLENGE_BODY" data-label="Challenge body">Monitoring jet fuel inventory required staff to physically climb each tank and use a dipstick.</div>
+        <div class="p1-ch-intro" id="chal-intro" contenteditable="true" data-field="CHALLENGE_PAIN_INTRO" data-label="Challenge intro">This manual process created several costly challenges:</div>
+        <div class="blist-tb" id="cb" contenteditable="true" data-field="CHALLENGE_BULLETS" data-label="Bullets"><div>• Staff required to physically climb tanks for every reading</div><div>• No real-time visibility between manual checks</div><div>• Risk of fuel-outs with no advance warning</div></div>
+        <div class="p1-ch-quote" id="chal-quote" contenteditable="true" data-field="CHALLENGE_QUOTE" data-label="Challenge quote">”We had to climb to the top of the tank and use a long stick.” — Joe Schmo, President.</div>
       </div>
       <div class="p1-footer draggable-el" id="p1-footer-el" data-label="Footer">
         <span class="footer-url" contenteditable="true" data-field="FOOTER_URL">www.TankScan.com</span>
@@ -774,24 +791,24 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
       </div>
       <div class="p2-sol draggable-el" id="sol-box" data-label="Solution box">
         <div class="box-hd" id="sol-hd" contenteditable="true" data-field="SOLUTION_HEADING" data-label="Solution heading">Solution</div>
-        <div class="p2-sol-p1" id="sol-p1" contenteditable="true" data-field="SOLUTION_P1" data-label="Solution paragraph 1"></div>
+        <div class="p2-sol-p1" id="sol-p1" contenteditable="true" data-field="SOLUTION_P1" data-label="Solution paragraph 1">AquaPhoenix Scientific deployed the TankScan Wireless Tank Monitor on their jet fuel tanks in Hanover, PA.</div>
         <div class="p2-sol-p2" id="sol-p2" contenteditable="true" data-field="SOLUTION_P2" data-label="Solution paragraph 2"></div>
         <!-- trifecta floats right here so sol-p1/p2 fill full width above, and sol-p3 wraps to its left -->
         <div class="img-slot draggable-el" id="trifecta-slot" data-img="TRIFECTA_IMAGE" data-label="Product photo">
           <img id="trifecta-img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMTUiIGhlaWdodD0iMTQwIj48cmVjdCB3aWR0aD0iMjE1IiBoZWlnaHQ9IjE0MCIgZmlsbD0id2hpdGUiIHJ4PSI0IiBzdHJva2U9IiNjOGQ0ZTAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtZGFzaGFycmF5PSI1LDQiLz48dGV4dCB4PSIxMDciIHk9IjY1IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjYjBiZWM4IiBmb250LWZhbWlseT0iQXJpYWwsc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMSIgZm9udC13ZWlnaHQ9ImJvbGQiPlByb2R1Y3QgUGhvdG88L3RleHQ+PHRleHQgeD0iMTA3IiB5PSI4MSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2IwYmVjOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOSI+Q2xpY2sgwrcgZHJvcCDCtyBvciByZXBsYWNlIHZpYSBwYW5lbDwvdGV4dD48L3N2Zz4=" alt="Product" style="object-fit:contain">
           <div class="img-hover"><div class="img-badge">🖱 Double-click<br>to change</div></div>
         </div>
-        <div class="p2-sol-p3" id="sol-p3" contenteditable="true" data-field="SOLUTION_P3" data-label="Solution paragraph 3"></div>
+        <div class="p2-sol-p3" id="sol-p3" contenteditable="true" data-field="SOLUTION_P3" data-label="Solution paragraph 3">Automated alerts now notify the team when fuel drops below the reorder threshold.</div>
       </div>
       <div class="p2-res draggable-el" id="res-box" data-label="Results box">
         <div class="box-hd" id="res-hd" contenteditable="true" data-field="RESULTS_HEADING" data-label="Results heading">Results</div>
-        <div class="p2-res-intro" id="res-intro" contenteditable="true" data-field="RESULTS_INTRO" data-label="Results intro"></div>
-        <div class="blist" id="rb" data-field="RESULTS_BULLETS"></div>
-        <div class="p2-res-quote" id="res-quote" contenteditable="true" data-field="RESULTS_QUOTE" data-label="Results quote"></div>
+        <div class="p2-res-intro" id="res-intro" contenteditable="true" data-field="RESULTS_INTRO" data-label="Results intro">Since deploying TankScan, AquaPhoenix Scientific has transformed fuel management:</div>
+        <div class="blist-tb" id="rb" contenteditable="true" data-field="RESULTS_BULLETS" data-label="Bullets"><div>• Real-time fuel data accessible from any device</div><div>• Automated alerts eliminate manual tank checks</div><div>• Proactive delivery scheduling prevents fuel-outs</div></div>
+        <div class="p2-res-quote" id="res-quote" contenteditable="true" data-field="RESULTS_QUOTE" data-label="Results quote">”The convenience of getting automated text and email alerts has been a game changer.” — Joe Schmo, President.</div>
       </div>
       <div class="p2-footer-group draggable-el" id="p2-footer-group" data-label="Page 2 footer">
         <div class="p2-docnum" contenteditable="true" data-field="DOC_NUMBER"
-             oninput="document.getElementById('meta-docnum').value=this.textContent.trim()"></div>
+             oninput="document.getElementById('meta-docnum').value=this.textContent.trim()">203-0041-000 Rev. A  4/11/2026</div>
         <div class="p2-ribbon"></div>
         <div class="p2-ribbon-txt">
           <span class="rc" contenteditable="true" data-field="RIBBON_COMPANY">AquaPhoenix Scientific</span>
@@ -1043,6 +1060,13 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
         <div style="font-size:10px;color:#64748b;line-height:1.4;margin-top:5px">
           Position image over a text box, then click Wrap Text.
         </div>
+        <div class="ps-row" style="margin-top:6px">
+          <span class="ps-lbl">Gap</span>
+          <input class="pi sm" id="pi-wrap-gap" type="number" min="0" max="30" step="1" value="1"
+            placeholder="px" title="Space between image and wrapped text (px)"
+            oninput="setWrapGap(this.value)">
+          <span class="ps-lbl" style="margin-left:2px">px</span>
+        </div>
       </div>
     </div>
 
@@ -1059,13 +1083,13 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
     <!-- META (always visible) -->
     <div class="meta-row">
       <div class="meta-lbl">Company Name</div>
-      <input class="meta-inp" id="meta-company" value=""
+      <input class="meta-inp" id="meta-company" value="AquaPhoenix Scientific"
              placeholder="Company name"
              oninput="setStatus('Company name updated')">
     </div>
     <div class="meta-row">
       <div class="meta-lbl">Document Number</div>
-      <input class="meta-inp" id="meta-docnum" value=""
+      <input class="meta-inp" id="meta-docnum" value="203-0041-000 Rev. A  4/11/2026"
              placeholder="203-0039-000 Rev. B  3/12/2026"
              oninput="const d=document.getElementById('docnum-display')||document.querySelector('[data-field=DOC_NUMBER]');if(d)d.textContent=this.value;setStatus('Doc number updated')">
     </div>
@@ -1103,7 +1127,7 @@ body{font-family:Arial,Helvetica,sans-serif;background:#111827;color:#e2e8f0;
     <p><strong>Resize:</strong> Drag any of the 8 corner / edge handles. All text boxes and images are resizable.</p>
     <p><strong>Edit text:</strong> Click any text element — the cursor appears immediately so you can type. Highlight any words, then a small format bar pops up above your selection for bold, italic, colour, size, etc.</p>
     <p><strong>Move a text box:</strong> Drag the small <strong>⠿</strong> teal dot that appears in the top-right corner of the dashed selection border.</p>
-    <p><strong>Bullet lists:</strong> Press <kbd>Enter</kbd> inside a bullet to create the next bullet. Press <kbd>Backspace</kbd> on an empty bullet to delete it. Click the <strong>✕</strong> on any bullet to remove it, or use the <strong>• List</strong> toolbar button to toggle a rich-text bullet list.</p>
+    <p><strong>Bullet lists:</strong> Click inside the bullet area and type. Press <kbd>Enter</kbd> to start a new bullet. Press <kbd>Backspace</kbd> on an empty bullet line to remove it. Select any bullet text and use the format bar to change colour, size, bold, etc.</p>
     <p><strong>Format:</strong> Select an element → use the toolbar strip (B / I / U, alignment, colour) or the Typography &amp; Box sections in the Properties panel.</p>
     <p><strong>Undo / Redo:</strong> <kbd>Ctrl+Z</kbd> / <kbd>Ctrl+Shift+Z</kbd>, or the ↩ / ↪ buttons.</p>
     <p><strong>Delete:</strong> Press <kbd>Delete</kbd> or <kbd>Backspace</kbd> (when not editing text), or click 🗑 in the panel.</p>
@@ -1823,6 +1847,7 @@ function onMoveDown(e) {
   if (!selectedEl) return;
   e.stopPropagation(); e.preventDefault();
   const el = getMoveTarget(selectedEl);
+  if (el.classList.contains('hdr-logo')) return;
   if (el !== selectedEl) selectEl(el);
   // Remember wrap mode BEFORE _floatToAbsolute strips the float style so we
   // can restore it after the drag ends.
@@ -1867,9 +1892,14 @@ function onResizeDown(e, dir) {
   if (!selectedEl) return;
   e.stopPropagation(); e.preventDefault();
   const el = getMoveTarget(selectedEl);
+  if (el.classList.contains('hdr-logo')) return;
   // If we redirected to a parent box, snap the selection overlay to it first
   // so the resize start dimensions match what the overlay is showing.
   if (el !== selectedEl) selectEl(el);
+  // Capture wrap mode BEFORE _floatToAbsolute (same pattern as onMoveDown) so
+  // the placeholder can be refreshed during resize and re-applied on mouseup.
+  const _hadWrapMode = (['left','right'].includes(el.dataset.wrapMode))
+    ? el.dataset.wrapMode : null;
   // Convert float elements to absolute before resizing
   _floatToAbsolute(el);
   // Ensure boxes with right:auto or min-height get explicit dimensions before resize
@@ -1885,6 +1915,7 @@ function onResizeDown(e, dir) {
     startMX: e.clientX, startMY: e.clientY,
     startL, startT,
     startW: el.offsetWidth, startH: el.offsetHeight,
+    hadWrapMode: _hadWrapMode,
   };
   document.body.style.userSelect = 'none';
 }
@@ -1932,6 +1963,11 @@ document.addEventListener('mousemove', e => {
     }
     el.style.left = nx + 'px'; el.style.top = ny + 'px';
     el.style.right = 'auto';   el.style.bottom = 'auto';
+    // Real-time wrap-placeholder update — direct call on every move event so
+    // text re-flows continuously while the user drags a wrapped image.
+    if (dragState.hadWrapMode && el.classList.contains('img-slot')) {
+      _refreshWrapPh(el);
+    }
     // Move all other multi-selected elements by the same delta
     if (dragState.multiStartPositions && dragState.multiStartPositions.size > 1) {
       const dx = nx - dragState.startL;
@@ -1991,6 +2027,11 @@ document.addEventListener('mousemove', e => {
   } else if (mode === 'resize') {
     applyResize(el, dir, rawDX, rawDY, dragState);
     dragState.moved = true;
+    // Update wrap placeholder in real-time as the user resizes a wrapped image
+    // (same pattern as the move branch above — image stays absolute, placeholder tracks size)
+    if (dragState.hadWrapMode && el.classList.contains('img-slot')) {
+      _refreshWrapPh(el);
+    }
     // Snap-guide feedback on the active resize edge (same as move guides)
     const rPage = el.closest('.page');
     if (rPage) {
@@ -2150,6 +2191,14 @@ function wireDraggable(el) {
     // deselect listener doesn't run on valid element clicks.
     e.stopPropagation();
 
+    // hdr-logo is right-anchored (right:27px in CSS) and is a flex container.
+    // Even a 1-pixel accidental drag triggers el.style.right='auto', converting
+    // it from right-anchored to left-anchored and breaking its layout.  The
+    // inline width/height lock also constrains the flex container.  Solution:
+    // clicking the logo only selects it for child text-editing — never primes
+    // a drag.  Resize is blocked in onResizeDown for the same reason.
+    if (el.classList.contains('hdr-logo')) { selectEl(el); return; }
+
     // Ctrl/Cmd+click = multi-select
     if ((e.ctrlKey || e.metaKey) && !e.target.closest('#sel-overlay')) {
       e.stopPropagation();
@@ -2280,43 +2329,56 @@ function wireTextEl(el) {
   if (el._textWired) return;   // prevent duplicate listeners
   el._textWired = true;
 
-  // ── Bullet-row keyboard behaviour (Enter = new bullet, Backspace on empty = delete) ──
-  if (el.classList.contains('btxt')) {
+  // ── Single-div bullet box keyboard behaviour ──
+  if (el.classList.contains('blist-tb')) {
     el.addEventListener('keydown', ev => {
       if (ev.key === 'Enter') {
         ev.preventDefault();
-        const row   = el.closest('.brow');
-        const list  = row && row.parentElement;
-        if (!list) return;
-        const fld   = el.dataset.field || 'BULLETS_ITEM';
-        const newRow = document.createElement('div');
-        newRow.className    = 'brow';
-        newRow.dataset.list = list.id;
-        newRow.innerHTML =
-          '<span class="bsym">•</span>' +
-          '<span class="btxt" contenteditable="true" data-field="' + fld + '"></span>' +
-          '<button class="bdel" onclick="delBullet(this)" title="Remove bullet">✕</button>';
-        row.after(newRow);
-        const newTxt = newRow.querySelector('.btxt');
-        wireTextEl(newTxt);
-        newTxt.focus();
-      } else if (ev.key === 'Backspace' && el.textContent === '') {
-        ev.preventDefault();
-        const row  = el.closest('.brow');
-        const prev = row && row.previousElementSibling;
-        const prevTxt = prev && prev.querySelector('.btxt');
-        row && row.remove();
-        if (prevTxt) {
-          prevTxt.focus();
-          const r = document.createRange();
-          r.selectNodeContents(prevTxt); r.collapse(false);
-          const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        const sel = window.getSelection();
+        if (!sel.rangeCount) return;
+        const range = sel.getRangeAt(0);
+        range.deleteContents();
+        let node = range.startContainer;
+        let bulletDiv = (node.nodeType === 3) ? node.parentElement : node;
+        while (bulletDiv && bulletDiv.parentElement !== el) bulletDiv = bulletDiv.parentElement;
+        const newDiv = document.createElement('div');
+        newDiv.textContent = '• ';
+        if (bulletDiv && bulletDiv.parentElement === el) bulletDiv.after(newDiv);
+        else el.appendChild(newDiv);
+        const newRange = document.createRange();
+        newRange.selectNodeContents(newDiv);
+        newRange.collapse(false);
+        sel.removeAllRanges();
+        sel.addRange(newRange);
+      } else if (ev.key === 'Backspace') {
+        const sel = window.getSelection();
+        if (!sel.rangeCount || !sel.isCollapsed) return;
+        const range = sel.getRangeAt(0);
+        let node = range.startContainer;
+        let bulletDiv = (node.nodeType === 3) ? node.parentElement : node;
+        while (bulletDiv && bulletDiv.parentElement !== el) bulletDiv = bulletDiv.parentElement;
+        if (!bulletDiv || bulletDiv.parentElement !== el) return;
+        const text = bulletDiv.textContent;
+        // Delete empty or bullet-only lines (cursor at start)
+        if ((text === '• ' || text.trim() === '•' || text === '') && el.children.length > 1) {
+          ev.preventDefault();
+          const prev = bulletDiv.previousElementSibling;
+          bulletDiv.remove();
+          if (prev) {
+            const r = document.createRange();
+            r.selectNodeContents(prev);
+            r.collapse(false);
+            sel.removeAllRanges();
+            sel.addRange(r);
+          }
         }
       }
     });
   }
 
   el.addEventListener('focus', () => {
+    // Un-collapse if this row was previously hidden when emptied
+    el.classList.remove('_tb-hidden');
     // Clear any saved selection from a previous element so stale offsets
     // don't accidentally apply to this element's text.
     if (_activeTextEl !== el) _clearSelRange();
@@ -2349,6 +2411,17 @@ function wireTextEl(el) {
     // their onclick, so we need the range to survive that brief window.
     // DO show ghost highlight so the user can see what text is targeted.
     if (_savedOffsets) setTimeout(_showGhostHighlight, 50);
+    // Collapse inner text rows that have been fully cleared — they become a
+    // thin clickable strip; hover the parent box to reveal them.
+    if (!el.classList.contains('draggable-el') &&
+        !el.classList.contains('box-hd') &&
+        !el.classList.contains('blist-tb')) {
+      const parentBox = el.closest('.p1-chal, .p2-sol, .p2-res');
+      if (parentBox && el.textContent.trim() === '') {
+        el.innerHTML = '';          // clear any stray <br> left by browser
+        el.classList.add('_tb-hidden');
+      }
+    }
   });
 
   el.addEventListener('input', () => syncTextToPanel(el));
@@ -2517,6 +2590,9 @@ function refreshPropsPanel() {
       btn.style.borderColor = active ? '#14b8a6' : '';
       btn.style.color       = active ? '#14b8a6' : '';
     });
+    // Populate wrap-gap input
+    const wgInp = document.getElementById('pi-wrap-gap');
+    if (wgInp) wgInp.value = el.dataset.wrapGap !== undefined ? el.dataset.wrapGap : '5';
   } else {
     propsEmpty.style.display = 'none';
     imgBlock.style.display = 'none';
@@ -3630,15 +3706,32 @@ function applyAutoWrap() {
   document.querySelectorAll('.wrap-ph[data-for="' + el.id + '"]').forEach(p => p.remove());
   // Scale screen px → page-point coordinates
   const scale = cRect.width > 0 ? cRect.width / container.offsetWidth : 1;
-  const phW   = eRect.width  / scale;
+  // Placeholder must span from the CONTENT EDGE of insertTarget to the IMAGE'S FAR EDGE
+  // so the CSS float pushes text clear of the actual image.  The container boxes have
+  // up to 14px of CSS padding; floats are anchored at the CONTENT edge (inside padding),
+  // not the border edge — so we measure from insertTarget's own rect and subtract its
+  // computed padding.  Without this the placeholder is padding-width too wide, creating
+  // a visible gap between image and text even when wrapGap is set to 0.
+  // getComputedStyle always returns px on Chrome/Edge/Windows — parseFloat strips the unit.
+  const itRect = insertTarget.getBoundingClientRect();
+  const _cs    = window.getComputedStyle(insertTarget);
+  const _padL  = parseFloat(_cs.paddingLeft)  || 0;
+  const _padR  = parseFloat(_cs.paddingRight) || 0;
+  // Clamp to content width so Windows scrollbars (which shrink offsetWidth ~17px)
+  // never produce a placeholder wider than the available text column.
+  const _contentW = Math.max(10, insertTarget.offsetWidth - _padL - _padR);
+  const phW   = Math.min(_contentW, Math.max(0, floatDir === 'left'
+    ? (eRect.right - itRect.left) / scale - _padL
+    : (itRect.right - eRect.left) / scale - _padR));
   const phH   = eRect.height / scale;
   // Invisible floated placeholder — same size as the image, no margin-top.
   // DOM insertion position controls the vertical alignment (text above = before placeholder).
   const ph = document.createElement('div');
   ph.className   = 'wrap-ph';
   ph.dataset.for = el.id;
+  const _wrapGap = Math.max(0, parseInt(el.dataset.wrapGap || '5', 10));
   ph.style.cssText = 'float:' + floatDir + ';width:' + phW + 'px;height:' + phH + 'px;'
-    + (floatDir === 'left' ? 'margin-right:10px;' : 'margin-left:10px;')
+    + (floatDir === 'left' ? 'margin-right:' + _wrapGap + 'px;' : 'margin-left:' + _wrapGap + 'px;')
     + 'pointer-events:none;visibility:hidden;';
   insertTarget.style.overflow = 'auto';
   // Insert at the vertical position matching the image's top — text before this
@@ -3657,6 +3750,104 @@ function applyAutoWrap() {
   el.dataset.wrapMode = floatDir;
   refreshPropsPanel();
   setStatus('✓ Text wraps around image — image stays in place · click No Wrap to release');
+}
+
+// Lightweight wrap-placeholder refresh used during drag (no status/panel update).
+// Key: REUSE the existing placeholder div — never remove+recreate it per-frame.
+// Removing it causes a full-width layout flash before re-insertion and makes
+// getBoundingClientRect() on children return wrong (unwrapped) positions.
+// Instead we just MOVE the placeholder to its new DOM position each frame.
+function _refreshWrapPh(el) {
+  const page = el.closest('.page');
+  if (!page) return;
+
+  // Reuse the existing placeholder — find it from the DOM.
+  let ph = document.querySelector('.wrap-ph[data-for="' + el.id + '"]');
+
+  // Derive the container from the placeholder's current parent (most reliable),
+  // falling back to spatial search only if there is no placeholder yet.
+  let insertTarget = ph ? ph.parentElement : null;
+  let container = insertTarget
+    ? (insertTarget.classList.contains('custom-tb-inner')
+        ? insertTarget.closest('.custom-tb')
+        : insertTarget)
+    : null;
+  if (!container) {
+    container = _findWrapContainer(el) || page.querySelector('.p1-chal,.p2-sol,.p2-res,.custom-tb');
+    if (!container) return;
+    insertTarget = container.classList.contains('custom-tb')
+      ? (container.querySelector('.custom-tb-inner') || container)
+      : container;
+  }
+
+  const cRect = container.getBoundingClientRect();
+  const eRect = el.getBoundingClientRect();
+  const scale    = cRect.width > 0 ? cRect.width / container.offsetWidth : 1;
+  const floatDir = (eRect.left + eRect.width / 2) <= (cRect.left + cRect.width / 2) ? 'left' : 'right';
+  const _g = Math.max(0, parseInt(el.dataset.wrapGap || '5', 10));
+  // Placeholder width spans from the CONTENT EDGE of insertTarget to the image's far edge.
+  // Floats anchor at the content edge (inside padding), so we measure from insertTarget's
+  // own bounding rect and subtract its computed horizontal padding.  This prevents the
+  // padding from being double-counted, which would create an unwanted gap at wrapGap=0.
+  // getComputedStyle always returns px on Chrome/Edge/Windows — parseFloat strips the unit.
+  const itRect  = insertTarget.getBoundingClientRect();
+  const _cs     = window.getComputedStyle(insertTarget);
+  const _padL   = parseFloat(_cs.paddingLeft)  || 0;
+  const _padR   = parseFloat(_cs.paddingRight) || 0;
+  // Clamp to content width so Windows scrollbars never produce an oversized placeholder.
+  const _contentW = Math.max(10, insertTarget.offsetWidth - _padL - _padR);
+  const phW = Math.min(_contentW, Math.max(0, floatDir === 'left'
+    ? (eRect.right - itRect.left) / scale - _padL
+    : (itRect.right - eRect.left) / scale - _padR));
+
+  if (!ph) {
+    // First drag frame — create the placeholder
+    ph = document.createElement('div');
+    ph.className   = 'wrap-ph';
+    ph.dataset.for = el.id;
+    ph.style.cssText = 'float:' + floatDir + ';width:' + phW + 'px;height:'
+      + (eRect.height / scale) + 'px;pointer-events:none;visibility:hidden;'
+      + (floatDir === 'left' ? 'margin-right:' + _g + 'px;' : 'margin-left:' + _g + 'px;');
+    insertTarget.appendChild(ph); // temporary; repositioned below
+  } else {
+    // Update dimensions/direction in place — no remove needed
+    ph.style.float       = floatDir;
+    ph.style.width       = phW + 'px';
+    ph.style.height      = (eRect.height / scale) + 'px';
+    ph.style.marginRight = floatDir === 'left'  ? _g + 'px' : '0';
+    ph.style.marginLeft  = floatDir === 'right' ? _g + 'px' : '0';
+  }
+
+  // Find the correct insertion point while the placeholder is still in the DOM
+  // (child positions are accurate — no intermediate full-width state).
+  const imgTopAbs = eRect.top;
+  const kids = Array.from(insertTarget.childNodes).filter(n => n !== ph);
+  let insertPt = null;
+  for (const kid of kids) {
+    const kr = typeof kid.getBoundingClientRect === 'function' ? kid.getBoundingClientRect() : null;
+    if (kr && kr.top >= imgTopAbs - 6) { insertPt = kid; break; }
+  }
+  const heading = insertTarget.querySelector('.box-hd');
+  if (insertPt && heading && insertPt === heading) insertPt = heading.nextSibling || null;
+
+  // Move placeholder only when its sibling actually changes (avoids gratuitous reflows)
+  const targetSib = insertPt || null;
+  if (ph.nextSibling !== targetSib || ph.parentElement !== insertTarget) {
+    if (targetSib) insertTarget.insertBefore(ph, targetSib);
+    else insertTarget.appendChild(ph);
+  }
+  el.dataset.wrapMode = floatDir;
+}
+
+// ── Wrap gap control ──────────────────────────────────────────────────────────
+function setWrapGap(val) {
+  if (!selectedEl || !selectedEl.classList.contains('img-slot')) return;
+  const gap = Math.max(0, parseInt(val, 10) || 0);
+  selectedEl.dataset.wrapGap = gap;
+  const wm = selectedEl.dataset.wrapMode;
+  if (wm === 'left' || wm === 'right') {
+    applyAutoWrap(); // re-apply with new gap
+  }
 }
 
 function applyWrap(mode) {
@@ -3728,7 +3919,8 @@ function applyWrap(mode) {
     case 'left':
     case 'right': {
       const floatDir = (mode === 'left') ? 'left' : 'right';
-      const margin   = (mode === 'left') ? '4px 14px 10px 0' : '4px 0 10px 14px';
+      const _g = Math.max(0, parseInt(el.dataset.wrapGap || '5', 10));
+      const margin   = (mode === 'left') ? ('4px ' + _g + 'px 8px 0') : ('4px 0 8px ' + _g + 'px');
       let container = _findWrapContainer(el);
       if (!container) {
         // Fallback: use first text element on the page
@@ -3812,29 +4004,19 @@ function applyWrap(mode) {
 
 // ─────────────────────────────────────────────────────────────────────────────
 // BULLET HELPERS
+// Bullets are now a single contenteditable div (.blist-tb) — each line is a
+// child <div>• text</div>. Press Enter to add a bullet, Backspace on an empty
+// bullet to remove it. No separate add/delete functions needed.
 // ─────────────────────────────────────────────────────────────────────────────
-function addBullet(cid, field) {
-  const container = document.getElementById(cid);
-  const btn = container.querySelector('.badd');
-  const row = document.createElement('div');
-  row.className    = 'brow';
-  row.dataset.list = field;
-  row.innerHTML = (
-    '<span class="bsym">•</span>' +
-    '<span class="btxt" contenteditable="true" data-field="' + field + '_ITEM">New item</span>' +
-    '<button class="bdel" onclick="delBullet(this)" title="Remove">✕</button>'
-  );
-  container.insertBefore(row, btn);
-  const span = row.querySelector('.btxt');
-  wireTextEl(span);
-  span.focus();
-  document.execCommand('selectAll', false, null);
-  setStatus('New bullet — type to edit');
-}
-
-function delBullet(btn) {
-  btn.closest('.brow').remove();
-  setStatus('Bullet removed');
+function addBullet(cid) {
+  // Legacy compat shim — focus the blist-tb and let the user press Enter
+  const el = document.getElementById(cid);
+  if (el && el.classList.contains('blist-tb')) {
+    el.focus();
+    const r = document.createRange();
+    r.selectNodeContents(el); r.collapse(false);
+    const s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+  }
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -3842,9 +4024,29 @@ function delBullet(btn) {
 // ─────────────────────────────────────────────────────────────────────────────
 function getField(f) {
   const el = document.querySelector('[data-field="' + f + '"]');
-  return el ? el.textContent.trim() : '';
+  if (!el) return '';
+  // Clone and strip any injected contenteditable="false" elements
+  // so they don't pollute exported field values.
+  const clone = el.cloneNode(true);
+  clone.querySelectorAll('[contenteditable="false"]').forEach(n => n.remove());
+  return clone.textContent.trim();
 }
 function getBullets(cid) {
+  const el = document.getElementById(cid);
+  if (!el) return [];
+  if (el.classList.contains('blist-tb')) {
+    const divs = el.querySelectorAll('div');
+    if (divs.length) {
+      return Array.from(divs)
+        .map(d => d.textContent.replace(/^•\s*/, '').trim())
+        .filter(t => t.length > 0);
+    }
+    // Fallback: plain text lines
+    return el.textContent.split('\n')
+      .map(t => t.replace(/^•\s*/, '').trim())
+      .filter(t => t.length > 0);
+  }
+  // Legacy brow fallback (shouldn't exist, but safe)
   return Array.from(document.querySelectorAll('#' + cid + ' .btxt'))
     .map(e => e.textContent.trim()).filter(Boolean);
 }
@@ -4560,22 +4762,26 @@ function _aiSetField(id, text, isHtml) {
 function _aiSetBullets(listId, field, items) {
   const list = document.getElementById(listId);
   if (!list || !Array.isArray(items) || !items.length) return;
-  list.innerHTML = '';
-  items.forEach(txt => {
-    if (!txt || !txt.trim()) return;
-    const row = document.createElement('div');
-    row.className = 'brow';
-    row.innerHTML =
-      '<span class="bsym">•</span>' +
-      '<span class="btxt" contenteditable="true" data-field="' + field + '_ITEM">' +
-        txt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') +
-      '</span>' +
-      '<button class="bdel" onclick="delBullet(this)" title="Remove">✕</button>';
-    list.appendChild(row);
-    // Wire each new span so the floating format bar can style bullet text
-    const span = row.querySelector('.btxt');
-    if (span) wireTextEl(span);
-  });
+  if (list.classList.contains('blist-tb')) {
+    list.innerHTML = items
+      .filter(t => t && t.trim())
+      .map(t => '<div>• ' + t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div>')
+      .join('');
+  } else {
+    // Legacy brow fallback
+    list.innerHTML = '';
+    items.forEach(txt => {
+      if (!txt || !txt.trim()) return;
+      const row = document.createElement('div');
+      row.className = 'brow';
+      row.innerHTML =
+        '<span class="bsym">•</span>' +
+        '<span class="btxt" contenteditable="true" data-field="' + field + '_ITEM">' +
+          txt.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') +
+        '</span>';
+      list.appendChild(row);
+    });
+  }
   list.classList.add('ai-flash');
   setTimeout(() => list.classList.remove('ai-flash'), 1600);
 }
@@ -4823,13 +5029,15 @@ function _jsBuildCaseStudy(rawText, overrides) {
   const toBullet  = s => {
     // Strip "Category Name: actual text" prefixes (e.g. "Time and Cost Savings: Eliminated trips...")
     let t = s.replace(/^[A-Z][A-Za-z &]{2,30}:\s+/, '');
-    // Strip common sentence starters
-    t = t.replace(/^(This|It|That|The process|Staff|Employees|They|We|The team|The company|There was|There were|Operators)\s+/i,'');
+    // Strip common sentence starters — expanded list for cleaner bullets
+    t = t.replace(/^(This|It|That|The process|The system|The solution|The approach|The method|Staff|Employees|They|We|Our|The team|The company|The organization|There was|There were|Operators|Workers|Personnel|Management|Previously|Historically|Before|In the past|Prior to|At the time)\s+/i,'');
+    // Strip "required/needed/had [someone] to [verb]" opener → keep the action phrase
+    t = t.replace(/^(required|needed|had)\s+\S+\s+to\s+/i,'');
     t = fixSpaces(trimPunct(t));
-    // Truncate at word boundary (never mid-word)
-    if (t.length > 120) {
-      const cut = t.lastIndexOf(' ', 120);
-      t = t.slice(0, cut > 60 ? cut : 120);
+    // Bullets must be concise — truncate at 85 chars (word boundary)
+    if (t.length > 85) {
+      const cut = t.lastIndexOf(' ', 85);
+      t = t.slice(0, cut > 45 ? cut : 85);
     }
     return cap(t);
   };
@@ -4876,7 +5084,8 @@ function _jsBuildCaseStudy(rawText, overrides) {
   const chalIntro = `This created several ongoing challenges for ${company}:`;
 
   // ── Challenge bullets ─────────────────────────────────────────────────────
-  let chalBullets = chalS.filter(s=>s!==bestChal).slice(0,4).map(toBullet).filter(b=>b.length>12);
+  // Keyword-aware fallbacks: concise, on-topic pain-point phrases matched to the source text.
+  // These are the primary source; short extracted sentences supplement up to 2 slots.
   const FB = [
     /climb|top of.*tank|physical/i.test(raw)   ? 'Manual measurements required staff to physically visit and climb each tank' : null,
     /drive|travel|mile|trip/i.test(raw)         ? 'Costly site visits required to obtain inventory readings' : null,
@@ -4884,12 +5093,22 @@ function _jsBuildCaseStudy(rawText, overrides) {
     /safe|osha|danger|hazard/i.test(raw)        ? 'Safety concerns from manual measurement methods' : null,
     /dispatch|route|schedul/i.test(raw)         ? 'Inefficient delivery routing without real-time inventory data' : null,
     /guess|estimate|inaccur/i.test(raw)         ? 'Inaccurate inventory estimates between manual rounds' : null,
+    /no real.?time|no visib|blind/i.test(raw)   ? 'No real-time visibility into inventory levels between site visits' : null,
+    /call|phone|contact.*site/i.test(raw)       ? 'Staff had to call each site individually to check inventory levels' : null,
   ].filter(Boolean);
   if (!FB.length) FB.push(
     'Manual measurements consumed valuable staff time',
     'No real-time visibility into inventory levels between site visits',
     'Reactive delivery scheduling led to unnecessary trips and run-out risk'
   );
+  // Up to 2 short, clean extracted bullets can prepend the list for specificity
+  const chalExtracted = chalS.filter(s=>s!==bestChal).map(toBullet).filter(b=>b.length>12 && b.length<=80);
+  let chalBullets = chalExtracted.slice(0,2);
+  // Fill the rest from keyword-aware fallbacks (no duplicates)
+  for (const fb of FB) {
+    if (chalBullets.length >= 4) break;
+    if (!chalBullets.some(b=>b.toLowerCase().includes(fb.slice(0,18).toLowerCase()))) chalBullets.push(fb);
+  }
   while (chalBullets.length < 3) chalBullets.push(FB[chalBullets.length % FB.length]);
   chalBullets = chalBullets.slice(0,4);
 
@@ -4932,15 +5151,18 @@ function _jsBuildCaseStudy(rawText, overrides) {
 
   // ── Results ───────────────────────────────────────────────────────────────
   const resultsIntro = `Through the use of the TankScan solution, ${company} realizes numerous benefits including:`;
-  let resBullets = resS.filter(s=>!isPrompt(s)).slice(0,3).map(toBullet).filter(b=>b.length>12);
   const tripM = metrics.find(m=>/trip|visit|mile/i.test(m));
   const timeM = metrics.find(m=>/hour|hr|minute|day|week/i.test(m));
   const pctM  = metrics.find(m=>/%|percent/i.test(m));
+  // Keyword-aware win-statements: direct answers to the challenge pain points identified above.
+  // These lead the results bullets — they are purposefully crafted and always relevant.
   const FB2 = [
     /manual|climb|visit/i.test(raw)      ? 'Eliminated manual tank measurements, freeing staff for higher-value work' : null,
     /route|dispatch|delivery/i.test(raw) ? 'Optimized delivery routes using live inventory data from all tank locations' : null,
     /run.?out|runout|stockout/i.test(raw)? 'Eliminated risk of unexpected product run-outs through proactive alerts' : null,
     /safe|climb|hazard/i.test(raw)       ? 'Improved personnel safety by removing the need for manual on-site readings' : null,
+    /no real.?time|no visib|blind/i.test(raw) ? '24/7 real-time visibility into all inventory levels from any device' : null,
+    /call|phone|contact.*site/i.test(raw)? 'Inventory levels checked remotely — no more calling each site' : null,
     tripM                                ? `Reduced unnecessary site trips — ${tripM} saved` : null,
     timeM                                ? `${cap(timeM)} recovered by automating inventory checks` : null,
     pctM                                 ? `Measurable efficiency gain — ${pctM}` : null,
@@ -4950,12 +5172,19 @@ function _jsBuildCaseStudy(rawText, overrides) {
     'Proactive, just-in-time delivery scheduling replacing reactive emergency runs',
     `Real-time visibility across all ${tankStr} from a single dashboard`,
   ];
-  // De-dupe: remove metric bullets that repeat info already in resBullets
+  // Start with keyword-aware win-statements (most aligned with the challenge bullets above)
+  let resBullets = FB2.slice(0,3);
+  // Supplement with short, clean extracted result sentences (max 2, no duplicates)
+  const resExtracted = resS.filter(s=>!isPrompt(s)).map(toBullet).filter(b=>b.length>12 && b.length<=80);
+  for (const r of resExtracted) {
+    if (resBullets.length >= 4) break;
+    if (!resBullets.some(b=>b.toLowerCase().includes(r.slice(0,18).toLowerCase()))) resBullets.push(r);
+  }
+  // Fill to 3 minimum with always-reliable bullets
   const rbText = resBullets.join(' ').toLowerCase();
-  const dedupFB2 = FB2.filter(b => !b || !rbText.includes(b.slice(0,15).toLowerCase()));
   while (resBullets.length < 3) {
-    const next = dedupFB2[resBullets.length] || always[resBullets.length % 3];
-    if (next) resBullets.push(next); else break;
+    const next = always[resBullets.length % 3];
+    if (next && !rbText.includes(next.slice(0,15).toLowerCase())) resBullets.push(next); else break;
   }
   resBullets = resBullets.slice(0,4);
 
