@@ -202,7 +202,7 @@ body{
 .hdr{position:absolute;top:0;left:0;right:0;height:50px;background:white;
   overflow:hidden;z-index:20;}
 .hdr-teal{position:absolute;inset:0;background:#3A9DD1;
-  clip-path:polygon(0 0, 58.8% 0, 63.2% 100%, 0 100%);pointer-events:none;}
+  clip-path:polygon(0 0, 58.8% 0, 63.2% 100%, 0 100%);}
 .hdr-cs{position:absolute;top:21px;left:37px;color:white;font-size:15px;
   font-family:'Helvetica Neue',Arial,sans-serif;font-weight:400;cursor:move;z-index:21;min-width:60px;}
 .hdr-logo{position:absolute;top:21px;right:27px;display:flex;align-items:baseline;gap:0;}
@@ -243,7 +243,7 @@ body{
   color:#3D3D3D;white-space:normal;min-width:60px;max-width:120px;
   min-height:14px;line-height:1.35;}
 .p1-sep{position:absolute;top:330px;left:0;right:0;height:5px;
-  background:#3A9DD1;pointer-events:none;}
+  background:#3A9DD1;}
 #hero-lower{position:absolute;top:335px;left:0;right:0;bottom:0;
   overflow:hidden;z-index:1;}
 #hero-lower img{width:100%;height:100%;object-fit:cover;pointer-events:none;}
@@ -295,8 +295,7 @@ body{
 .p2-docnum{position:absolute;top:0;left:36px;font-size:7.5px;
   font-weight:bold;color:#222222;font-family:Arial,sans-serif;white-space:pre;}
 .p2-ribbon{position:absolute;top:15px;left:0;width:387px;height:45px;
-  background:#636363;clip-path:polygon(0 0,96.6% 0,100% 50%,96.6% 100%,0 100%);
-  pointer-events:none;}
+  background:#636363;clip-path:polygon(0 0,96.6% 0,100% 50%,96.6% 100%,0 100%);}
 .p2-ribbon-txt{position:absolute;top:15px;left:16px;color:white;font-size:8px;font-family:Arial,sans-serif;}
 .p2-ribbon-txt .rc{position:absolute;top:8px;left:5px;white-space:nowrap;font-size:8px;font-weight:bold;}
 .p2-ribbon-txt .r1{position:absolute;top:19px;left:5px;white-space:nowrap;}
@@ -752,7 +751,7 @@ body{
     <div class="page-scale">
     <div class="page" id="page-1">
       <div class="hdr" id="p1-hdr">
-        <div class="hdr-teal"></div>
+        <div class="draggable-el hdr-teal" id="p1-hdr-teal" data-label="Teal header band (P1)"></div>
         <div class="draggable-el hdr-cs" id="p1-hdr-cs" contenteditable="true" data-field="HDR_CS" data-label="Header: Case Study text">Case Study</div>
         <div class="draggable-el hdr-logo" id="p1-hdr-logo" data-label="Header: Logo">
           <span class="tk" id="p1-tk" contenteditable="true" data-label="Header: Tank text">Tank</span><span class="sc" id="p1-sc" contenteditable="true" data-label="Header: Scan text">Scan</span>
@@ -779,7 +778,7 @@ body{
       <div class="draggable-el" id="app-val" contenteditable="true" data-field="APPLICATION" data-label="Application value">Fuel Inventory Mgmt.</div>
       <div class="draggable-el" id="mkt-lbl" contenteditable="true" data-field="MKT_LABEL" data-label="Market label">Market:</div>
       <div class="draggable-el" id="mkt-val" contenteditable="true" data-field="MARKET_VALUE" data-label="Market value">Aviation</div>
-      <div class="p1-sep"></div>
+      <div class="draggable-el p1-sep" id="p1-sep-line" data-label="Separator bar"></div>
       <div class="img-slot draggable-el" id="hero-lower" data-img="P1_BG_IMAGE" data-label="Page 1 background image">
         <img id="hero-lower-img" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MTIiIGhlaWdodD0iNDYwIj48cmVjdCB3aWR0aD0iNjEyIiBoZWlnaHQ9IjQ2MCIgZmlsbD0id2hpdGUiIHJ4PSI0IiBzdHJva2U9IiNjOGQ0ZTAiIHN0cm9rZS13aWR0aD0iMS41IiBzdHJva2UtZGFzaGFycmF5PSI1LDQiLz48dGV4dCB4PSIzMDYiIHk9IjIyNSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2IwYmVjOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTEiIGZvbnQtd2VpZ2h0PSJib2xkIj5QYWdlIDEgQmFja2dyb3VuZDwvdGV4dD48dGV4dCB4PSIzMDYiIHk9IjI0MSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2IwYmVjOCIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOSI+Q2xpY2sgwrcgZHJvcCDCtyBvciByZXBsYWNlIHZpYSBwYW5lbDwvdGV4dD48L3N2Zz4=" alt="" style="width:100%;height:100%;object-fit:cover;">
         <div class="img-hover"><div class="img-badge">🖱 Double-click to change</div></div>
@@ -804,7 +803,7 @@ body{
     <div class="page-scale">
     <div class="page" id="page-2">
       <div class="hdr" id="p2-hdr">
-        <div class="hdr-teal"></div>
+        <div class="draggable-el hdr-teal" id="p2-hdr-teal" data-label="Teal header band (P2)"></div>
         <div class="draggable-el hdr-cs" id="p2-hdr-cs" contenteditable="true" data-field="HDR_CS_P2" data-label="Header: Case Study text (P2)">Case Study</div>
         <div class="draggable-el hdr-logo" id="p2-hdr-logo" data-label="Header: Logo (P2)">
           <span class="tk" id="p2-tk" contenteditable="true" data-label="Header: Tank text (P2)">Tank</span><span class="sc" id="p2-sc" contenteditable="true" data-label="Header: Scan text (P2)">Scan</span>
@@ -832,8 +831,8 @@ body{
       <div class="p2-footer-group draggable-el" id="p2-footer-group" data-label="Page 2 footer">
         <div class="p2-docnum" contenteditable="true" data-field="DOC_NUMBER"
              oninput="document.getElementById('meta-docnum').value=this.textContent.trim()">203-0041-000 Rev. A  4/11/2026</div>
-        <div class="p2-ribbon"></div>
-        <div class="p2-ribbon-txt">
+        <div class="draggable-el p2-ribbon" id="p2-ribbon-bar" data-label="Footer ribbon"></div>
+        <div class="draggable-el p2-ribbon-txt" id="p2-ribbon-txt-el" data-label="Footer ribbon text">
           <span class="rc" contenteditable="true" data-field="RIBBON_COMPANY">AquaPhoenix Scientific</span>
           <span class="r1" contenteditable="true" data-field="RIBBON_ADDR1">860 Gitts Run Road</span>
           <span class="r2" contenteditable="true" data-field="RIBBON_ADDR2">Hanover, PA 17331</span>
@@ -1278,6 +1277,7 @@ let _syncing        = false;  // prevent textarea↔page feedback loop
 const UNDO_LIMIT = 50;
 let undoStack = [];
 let redoStack = [];
+let _suppressTextUndo = false; // set true while deleting a line so blur doesn't double-push undo
 
 // Per-element text-before-edit (for undo coalescing)
 const _textBefore = new WeakMap();
@@ -2406,7 +2406,10 @@ function wireTextEl(el) {
     // don't accidentally apply to this element's text.
     if (_activeTextEl !== el) _clearSelRange();
     _activeTextEl = el;
-    _textBefore.set(el, el.innerHTML);
+    // Save the PARENT draggable-el's full snapshot so undo can restore it correctly.
+    // (If el IS the draggable-el, parentForUndo === el and this is equivalent to the old logic.)
+    const _parentForUndo = el.classList.contains('draggable-el') ? el : (el.closest('.draggable-el') || el);
+    _textBefore.set(el, captureEl(_parentForUndo));
     // Remove ghost highlight — browser selection is now live again
     _clearGhostHighlight();
     // Overlay goes on the parent draggable box (PPT behaviour — whole box selected,
@@ -2421,12 +2424,19 @@ function wireTextEl(el) {
   });
 
   el.addEventListener('blur', () => {
-    const before = _textBefore.get(el);
-    if (before !== undefined && before !== el.innerHTML) {
-      const parentEl = el.closest('.draggable-el') || el;
-      const snap0 = captureEl(parentEl) || { id: parentEl.id };
-      const snapBefore = Object.assign({...snap0}, { innerHTML: before });
-      pushUndo(snapBefore, captureEl(parentEl));
+    if (!_suppressTextUndo) {
+      const snapBefore = _textBefore.get(el);
+      // snapBefore is now a full captureEl() snapshot of the parent draggable-el,
+      // so we can correctly compare parent innerHTML before/after the edit.
+      if (snapBefore && snapBefore.id) {
+        const parentEl = document.getElementById(snapBefore.id);
+        if (parentEl) {
+          const snapAfter = captureEl(parentEl);
+          if (snapBefore.innerHTML !== snapAfter.innerHTML) {
+            pushUndo(snapBefore, snapAfter);
+          }
+        }
+      }
     }
     _textBefore.delete(el);
     _exitTextMode();
@@ -2801,32 +2811,46 @@ function _applyFontSizeToSel(sizePx) {
   if (_savedOffsets) _restoreByOffsets(_savedOffsets);
   else _restoreSelRange();
   const sel = window.getSelection();
-  if (!sel || sel.isCollapsed) return;
+  if (!sel || sel.isCollapsed || !sel.rangeCount) return;
 
-  // Snapshot char offsets BEFORE execCommand mutates the DOM.
-  // Character offsets are stable across span-wrapping mutations because the
-  // text content itself doesn't change — only its container elements do.
+  // Snapshot char offsets BEFORE DOM mutation (text content won't change, only
+  // its container elements, so offsets remain valid across span insertions).
   const preOffsets = _getOffsets() || _savedOffsets;
+  const range = sel.getRangeAt(0);
+  if (range.collapsed) return;
 
-  document.execCommand('styleWithCSS', false, false); // force <font> not <span>
-  document.execCommand('fontSize', false, '7');       // wraps sel in <font size="7">
-  // Replace every <font size="7"> inside the active text el with a proper px span.
-  const root = _activeTextEl || document.body;
-  root.querySelectorAll('font[size="7"]').forEach(font => {
-    const span = document.createElement('span');
-    span.style.fontSize = sizePx;
-    if (font.style && font.style.cssText) span.style.cssText += ';' + font.style.cssText;
-    span.innerHTML = font.innerHTML;
-    font.replaceWith(span);
-  });
-  // Re-select using CHARACTER OFFSETS, not setStartBefore/setEndAfter.
-  // The old element-level approach (setStartBefore(span)…setEndAfter(span))
-  // produced a range whose anchorNode was the parent element rather than a text
-  // node.  _getOffsets()'s TreeWalker only visits text nodes, so it could never
-  // find that anchor → _savedOffsets collapsed to the end of the element →
-  // second font-size change always produced a collapsed range → early exit.
-  // _restoreByOffsets walks text nodes, so it correctly lands inside the new
-  // spans and produces a proper text-node-level selection every time.
+  // Walk every text node (partially) inside the range and wrap the selected
+  // characters in a <span style="font-size:Npx">.
+  // Using the Range API directly (instead of execCommand('fontSize')) avoids the
+  // focus / activeElement problems in Chrome/Edge that caused the whole-line
+  // fallback to fire, and correctly scopes the change to just the highlighted
+  // characters even when the range crosses element boundaries.
+  const root = range.commonAncestorContainer.nodeType === 1
+    ? range.commonAncestorContainer
+    : range.commonAncestorContainer.parentElement;
+  const hits = [];
+  const tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  let n;
+  while ((n = tw.nextNode())) {
+    if (!range.intersectsNode(n)) continue;
+    const s = (n === range.startContainer) ? range.startOffset : 0;
+    const e = (n === range.endContainer)   ? range.endOffset   : n.length;
+    if (s < e) hits.push({ n, s, e });
+  }
+  // Process in reverse DOM order so earlier splitText() calls don't shift the
+  // offsets we stored for later (earlier in document = higher index) nodes.
+  for (let i = hits.length - 1; i >= 0; i--) {
+    const { n, s, e } = hits[i];
+    if (e < n.length) n.splitText(e);           // detach tail — leave unchanged
+    const mid = (s > 0) ? n.splitText(s) : n;   // the selected run
+    const sp = document.createElement('span');
+    sp.style.fontSize = sizePx;
+    mid.parentNode.insertBefore(sp, mid);
+    sp.appendChild(mid);
+  }
+
+  // Re-select using CHARACTER OFFSETS so the blue highlight stays visible and
+  // the next format command targets the same characters.
   if (preOffsets) {
     _restoreByOffsets(preOffsets);
     _savedOffsets = preOffsets;
@@ -3152,10 +3176,33 @@ function setImgLink(url) {
 // ─────────────────────────────────────────────────────────────────────────────
 // DELETE
 // ─────────────────────────────────────────────────────────────────────────────
-const PROTECTED = new Set(['p1-sep','p1-white','p1-app-pane']);
+const PROTECTED = new Set(['p1-sep','p1-white','p1-app-pane',
+  'p1-hdr-teal','p2-hdr-teal','p1-sep-line','p2-ribbon-bar','p2-ribbon-txt-el']);
 
 function deleteSelected() {
-  // Delete all multi-selected elements
+  // ── Text-line delete: when a child text element is active, delete just that line ──
+  if (_activeTextEl
+      && _activeTextEl.isConnected
+      && !_activeTextEl.classList.contains('draggable-el')
+      && !_activeTextEl.classList.contains('box-hd')
+      && selectedEl
+      && selectedEl.contains(_activeTextEl)) {
+    const lineEl = _activeTextEl;
+    const parentEl = selectedEl;
+    const snapBefore = captureEl(parentEl);
+    // Suppress the text-change undo that blur() would otherwise push
+    _suppressTextUndo = true;
+    lineEl.blur();
+    lineEl.remove();
+    _suppressTextUndo = false;
+    _activeTextEl = null;
+    const snapAfter = captureEl(parentEl);
+    pushUndo(snapBefore, snapAfter);
+    selectEl(parentEl);
+    setStatus('Line deleted — Ctrl+Z to undo');
+    return;
+  }
+  // ── Element delete: remove whole selected draggable-el(s) ──
   const toDelete = _multiSel.size > 1
     ? [..._multiSel].filter(el => !PROTECTED.has(el.id))
     : (selectedEl && !PROTECTED.has(selectedEl.id) ? [selectedEl] : []);
@@ -3330,7 +3377,7 @@ function addPage() {
   // .hdr-logo = TankScan wordmark + "Powered by AquaPhoenix" stack.
   const hdrHtml =
     '<div class="hdr" id="p' + n + '-hdr">' +
-      '<div class="hdr-teal"></div>' +
+      '<div class="draggable-el hdr-teal" id="p' + n + '-hdr-teal" data-label="Teal header band (P' + n + ')"></div>' +
       '<div class="draggable-el hdr-cs" id="p' + n + '-hdr-cs" contenteditable="true" ' +
            'data-label="Header: Case Study (P' + n + ')">Case Study</div>' +
       '<div class="draggable-el hdr-logo" id="p' + n + '-hdr-logo" ' +
@@ -3743,9 +3790,14 @@ function applyAutoWrap() {
   // Clamp to content width so Windows scrollbars (which shrink offsetWidth ~17px)
   // never produce a placeholder wider than the available text column.
   const _contentW = Math.max(10, insertTarget.offsetWidth - _padL - _padR);
-  const phW   = Math.min(_contentW, Math.max(0, floatDir === 'left'
-    ? (eRect.right - itRect.left) / scale - _padL
-    : (itRect.right - eRect.left) / scale - _padR));
+  // Placeholder width = image's actual overlap with the content area.
+  // Using the overlap (not the full distance from image-edge to container-edge)
+  // prevents the large gap that appeared when the image was not flush against
+  // a container wall.  The formula works for both left and right float directions.
+  const _cL  = itRect.left  + _padL * scale;   // content-area left edge  (screen px)
+  const _cR  = itRect.right - _padR * scale;   // content-area right edge (screen px)
+  const phW  = Math.min(_contentW, Math.max(0,
+    (Math.min(eRect.right, _cR) - Math.max(eRect.left, _cL)) / scale));
   const phH   = eRect.height / scale;
   // Invisible floated placeholder — same size as the image, no margin-top.
   // DOM insertion position controls the vertical alignment (text above = before placeholder).
@@ -3764,7 +3816,7 @@ function applyAutoWrap() {
   let insertPt = null;
   for (const kid of kids) {
     const kr = typeof kid.getBoundingClientRect === 'function' ? kid.getBoundingClientRect() : null;
-    if (kr && kr.top >= imgTopAbs - 6) { insertPt = kid; break; }
+    if (kr && kr.bottom > imgTopAbs) { insertPt = kid; break; }
   }
   const heading = insertTarget.querySelector('.box-hd');
   if (insertPt && heading && insertPt === heading) insertPt = heading.nextSibling || null;
@@ -3819,9 +3871,13 @@ function _refreshWrapPh(el) {
   const _padR   = parseFloat(_cs.paddingRight) || 0;
   // Clamp to content width so Windows scrollbars never produce an oversized placeholder.
   const _contentW = Math.max(10, insertTarget.offsetWidth - _padL - _padR);
-  const phW = Math.min(_contentW, Math.max(0, floatDir === 'left'
-    ? (eRect.right - itRect.left) / scale - _padL
-    : (itRect.right - eRect.left) / scale - _padR));
+  // Placeholder width = image's actual overlap with the content area (same
+  // formula as applyAutoWrap — avoids the huge gap when image is not flush
+  // against a container wall, and updates correctly as the image is dragged).
+  const _cL  = itRect.left  + _padL * scale;
+  const _cR  = itRect.right - _padR * scale;
+  const phW  = Math.min(_contentW, Math.max(0,
+    (Math.min(eRect.right, _cR) - Math.max(eRect.left, _cL)) / scale));
 
   if (!ph) {
     // First drag frame — create the placeholder
@@ -3848,7 +3904,7 @@ function _refreshWrapPh(el) {
   let insertPt = null;
   for (const kid of kids) {
     const kr = typeof kid.getBoundingClientRect === 'function' ? kid.getBoundingClientRect() : null;
-    if (kr && kr.top >= imgTopAbs - 6) { insertPt = kid; break; }
+    if (kr && kr.bottom > imgTopAbs) { insertPt = kid; break; }
   }
   const heading = insertTarget.querySelector('.box-hd');
   if (insertPt && heading && insertPt === heading) insertPt = heading.nextSibling || null;
@@ -3974,7 +4030,7 @@ function applyWrap(mode) {
         for (const kid of candidateKids) {
           const kr = typeof kid.getBoundingClientRect === 'function'
                      ? kid.getBoundingClientRect() : null;
-          if (kr && kr.top >= imgTopAbs - 6) { insertPt = kid; break; }
+          if (kr && kr.bottom > imgTopAbs) { insertPt = kid; break; }
         }
         // Keep any heading at the top regardless
         const heading = insertTarget.querySelector('.box-hd');
